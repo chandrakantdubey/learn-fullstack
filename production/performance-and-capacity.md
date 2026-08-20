@@ -1,97 +1,110 @@
-# Performance and Capacity Engineering
+# Performance and Capacity
 
-Performance is predictable system behavior under a defined workload. Capacity planning turns vague scale claims into resource estimates and limits.
+Performance engineering starts with measurement. Capacity planning turns product traffic assumptions into resource requirements and scaling decisions.
 
-## Start with workload
+## Core metrics
 
-Define:
+For APIs, track:
 
-- requests/second
-- peak requests/second
-- concurrency
-- payload sizes
-- read/write ratio
-- database operations/request
-- cache hit rate
-- background work rate
-- latency targets
-- availability target
+- throughput: requests/sec
+- latency: median and tail percentiles, especially p95/p99
+- error rate
+- saturation: CPU, memory, connections, queue depth, I/O
 
-A useful first-pass estimate:
+Use RED for services:
 
 ```text
-concurrency ≈ throughput × average latency
+Rate
+Errors
+Duration
 ```
 
-Use measured values, then validate with load tests.
-
-## Latency budget
+Use resource signals for infrastructure:
 
 ```text
-Total request budget
- ├── CDN/network
- ├── frontend/server rendering
- ├── API processing
- ├── database
- └── external dependencies
+Utilization
+Saturation
+Errors
 ```
 
-Optimize the dominant contributor, not the most interesting component.
+## Capacity model
 
-## Backend bottlenecks
+Start with a simple model:
 
-Look for:
+```text
+requests/sec
+× average work/request
+× safety factor
+= required service capacity
+```
 
-- N+1 queries
-- missing/poor indexes
+For databases, estimate concurrent connections, query rate, storage growth, working set, and I/O rather than only CPU.
+
+For queues, compare arrival rate with sustainable consumer throughput. If arrivals exceed processing rate for long enough, backlog grows without bound.
+
+## Latency budgets
+
+Decompose an end-to-end request:
+
+```text
+edge
+ + network
+ + app queue
+ + application
+ + cache/DB
+ + downstream services
+```
+
+A p99 problem can hide inside a p50-looking average. Optimize the actual tail experienced by users.
+
+## Optimization order
+
+1. measure
+2. identify the bottleneck
+3. change one variable
+4. benchmark/load test
+5. verify correctness
+6. observe production impact
+
+Do not optimize based on intuition alone.
+
+## Common bottlenecks
+
+- N+1 database queries
+- missing/incorrect indexes
+- exhausted DB connection pool
 - oversized payloads
-- excessive serialization
-- connection-pool exhaustion
-- CPU saturation
-- memory pressure
-- lock contention
-- external dependency latency
-
-## Caching
-
-Cache only when the consistency model is understood.
-
-Measure:
-
-- hit rate
-- miss latency
-- eviction rate
-- memory usage
-- stale-read impact
+- synchronous work on request path
+- cache stampedes
+- unbounded queues
+- excessive logging
+- CPU-heavy serialization or parsing
+- memory leaks
+- frontend JavaScript and asset cost
 
 ## Load testing
 
-Use k6 or an equivalent tool to test:
+Use realistic traffic shape, not only constant load:
 
-- steady-state load
 - ramp-up
-- peak burst
-- sustained stress
-- dependency degradation
+- steady state
+- burst/spike
+- recovery
 
-Do not confuse a synthetic benchmark with production behavior.
+Measure saturation and error behavior, not only maximum requests/sec.
 
-## Autoscaling
+Representative tool: k6.
 
-Scaling signals should reflect the bottleneck: CPU, memory, request concurrency, queue depth, or custom application metrics.
+## SLOs
 
-Set both scale-up and scale-down behavior deliberately to avoid oscillation.
+Define service-level objectives around user-visible outcomes, for example:
 
-## SLI / SLO
+- successful request rate
+- latency target
+- availability window
 
-Examples:
+An SLO creates an engineering budget for reliability and change velocity. Error budgets should influence release decisions.
 
-- availability SLI: successful requests / total requests
-- latency SLI: request latency under target
-- freshness SLI: data age under target
+## Project proof
 
-SLOs create a reliability budget that helps prioritize engineering work.
-
-## Profiling
-
-Use tracing, CPU profiles, memory profiles, query plans, and runtime metrics to find actual bottlenecks before optimizing.
+Load test the task API, find the first bottleneck, document the limiting resource, introduce one justified optimization, and compare before/after results.

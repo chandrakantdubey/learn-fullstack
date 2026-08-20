@@ -1,98 +1,70 @@
-# Messaging and Event-Driven Systems
+# Messaging and Events
 
-Queues and streams decouple producers from consumers and turn synchronous work into asynchronous workflows.
+Queues and event streams decouple producers from consumers, absorb bursts, and move slow side effects out of request paths.
 
-## Primitives
+## Core concepts
 
-- queue
-- topic
 - producer
 - consumer
+- queue
+- topic
 - partition
 - offset
 - consumer group
-- acknowledgement
+- ordering
+- delivery semantics
 - dead-letter queue
-- retry queue
+- visibility timeout
+- retry policy
+- backpressure
 
 ## Delivery semantics
 
-Most production systems should assume **at-least-once** delivery.
+Design around at-least-once delivery in most practical systems. Consumers must therefore be idempotent.
 
-Therefore consumers must be idempotent:
+Exactly-once claims are usually narrower than they sound; understand the storage and side-effect boundaries before relying on them.
 
-```text
-message M
-  ↓
-process(M)
-  ↓
-ack
+## Queue vs stream
 
-If ack is lost:
-M is delivered again
-```
+Use a queue when work should generally be processed once by one consumer group. Use a stream when ordered records, replay, multiple independent consumers, or event history matter.
 
-Design `process(M)` so the second execution is safe.
+Typical choices:
 
-## Ordering
+- SQS for managed task queues
+- Kafka for high-throughput event streams and replay
+- Redis Streams for focused lightweight workloads
+- EventBridge for AWS event routing
 
-Ordering is usually scoped, not global. Partition or key messages by the entity whose order matters.
-
-Example:
+## Production worker
 
 ```text
-account_id=42 → same partition
-account_id=99 → another partition
+API
+ ↓
+transaction + outbox/event
+ ↓
+queue
+ ↓
+worker
+ ├── validate
+ ├── process
+ ├── commit durable result
+ └── ack
 ```
 
-## Kafka vs queues
+Only acknowledge after the durable side effect succeeds. Poison messages need bounded retries and a dead-letter path.
 
-Kafka is useful when durable ordered streams, replay, and multiple independent consumers matter. Cloud queues such as SQS are often simpler for work distribution where replayable log semantics are unnecessary.
+## Design questions
 
-## Retry strategy
+Before introducing a broker, answer:
 
-```text
-consumer
-  ↓
-transient failure
-  ↓
-retry with backoff
-  ↓
-retry budget exhausted
-  ↓
-DLQ / operator action
-```
+1. Why is synchronous processing insufficient?
+2. What ordering is required?
+3. What happens on duplicate delivery?
+4. What happens when consumers are down?
+5. How is backlog measured?
+6. How is replay handled?
+7. How is schema evolution managed?
 
-Never create an unbounded retry loop.
+## Project proof
 
-## Backpressure
-
-A producer may generate work faster than consumers can process it. Control this with bounded queues, consumer concurrency, rate limits, and load shedding.
-
-## Outbox pattern
-
-```text
-DB transaction
- ├── update business state
- └── insert outbox event
-
-commit
-  ↓
-outbox publisher
-  ↓
-queue / stream
-```
-
-This avoids committing business state while losing the event.
-
-## Common choices
-
-- SQS for managed background work
-- Kafka for durable event streams and replay
-- EventBridge for event routing across AWS services
-- Redis Streams for focused low-complexity stream use cases
-- Celery/BullMQ/worker frameworks when the application needs a job abstraction
-
-## Production concerns
-
-Monitor queue depth, age of oldest message, processing latency, consumer errors, retry count, DLQ growth, and consumer lag.
+The task system uses a background audit/notification job with explicit idempotency and retry behavior.

@@ -1,27 +1,25 @@
 # Cloud Architecture
 
-Cloud architecture is the application of systems principles to managed infrastructure.
+Cloud architecture is the mapping from application requirements to managed compute, storage, networking, identity, and operational services.
 
 ## Reference AWS shape
 
 ```text
 Route 53
    ↓
-CloudFront / CDN
+CloudFront / WAF
    ↓
-ALB
+Load Balancer
    ↓
-ECS/EKS or managed compute
+ECS/EKS or Lambda
    ├── API
    └── Worker
-
-API ──→ RDS PostgreSQL
-   ├──→ ElastiCache Redis
-   ├──→ S3
-   └──→ SQS / EventBridge
-
-IAM + KMS + Secrets Manager
-CloudWatch + OpenTelemetry
+      ↓
+  RDS PostgreSQL
+  ElastiCache Redis
+  S3
+  SQS
+  EventBridge
 ```
 
 ## Networking
@@ -29,62 +27,51 @@ CloudWatch + OpenTelemetry
 Understand:
 
 - VPC
-- public/private subnets
+- public vs private subnets
 - route tables
 - internet/NAT gateways
-- security groups
-- network ACLs
+- security groups vs network ACLs
 - DNS
 - load balancers
-- private service-to-service paths
-- availability zones
+- TLS termination
+- multi-AZ topology
 
-Databases and internal services should not be internet-exposed by default.
+Application services and databases should not share the same public exposure model.
+
+## Identity
+
+IAM should follow least privilege. Prefer workload identities/roles over static access keys. Separate human administrative access from service runtime permissions.
 
 ## Compute choices
 
-Choose based on workload:
+Choose based on operational burden, workload shape, and scaling behavior:
 
-- Lambda for event-driven, short-lived workloads
-- ECS/Fargate for managed containers without Kubernetes complexity
-- EKS when Kubernetes capabilities are actually required
-- EC2 for lower-level control or specialized workloads
+- Lambda for event/request workloads with suitable execution constraints
+- ECS/Fargate for containers without Kubernetes operational overhead
+- EKS when Kubernetes capabilities or platform standardization justify the cost
 
-The cheapest operationally is not always the cheapest at scale. Include engineering and operational cost.
+## Data services
 
-## IAM
+RDS provides managed relational operations. ElastiCache provides managed caching. S3 is the default durable object store for blobs/artifacts. SQS decouples asynchronous work.
 
-Use workload identity and short-lived credentials where possible. Separate deploy identity from runtime identity. Keep policies least-privilege and auditable.
+## Reliability
 
-## Managed data
+Start with multi-AZ deployment for production-critical services. Define RTO/RPO before designing disaster recovery. Cross-region replication is justified by business requirements, not by default fashion.
 
-Understand operational implications of:
-
-- RDS PostgreSQL
-- ElastiCache Redis
-- S3 durability/storage patterns
-- SQS delivery semantics
-- EventBridge routing
-
-## Availability and disaster recovery
-
-Design explicitly for:
-
-- AZ failure
-- database failure
-- dependency outage
-- bad deployment
-- data corruption
-- region outage
-
-Define RPO and RTO before selecting replication and recovery architecture.
-
-## Cost model
+## Cost
 
 Track:
 
-```text
-Compute + storage + network + managed services + observability + human operations
-```
+- compute utilization
+- database size and IOPS
+- network egress
+- NAT gateway usage
+- log/trace volume
+- idle development environments
+- storage lifecycle
 
-Control cost with right-sized compute, autoscaling bounds, storage lifecycle policies, caching, batching, and removal of unnecessary always-on services.
+Architecture is incomplete if the cost model is unknown.
+
+## Project mapping
+
+The task system should first run locally, then map to a small AWS topology before any multi-region design is attempted.

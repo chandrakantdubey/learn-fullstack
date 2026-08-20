@@ -1,94 +1,75 @@
 # NoSQL, Search, and Vector Data
 
-Do not choose a data store from fashion. Choose it from access patterns, consistency requirements, workload shape, and operational constraints.
+Use specialized data stores when the access pattern justifies them. PostgreSQL remains the default source of truth for transactional application state.
 
 ## Document databases
 
-MongoDB and similar document stores fit workloads where documents map naturally to the application aggregate and schema flexibility is useful.
+Document stores fit aggregates that are naturally retrieved and updated as documents, with flexible schemas and fewer relational joins.
 
 Understand:
 
-- embedded vs referenced data
-- document boundaries
-- indexes
-- aggregation
-- atomicity boundaries
-- transactions and their limits
-- denormalization for read patterns
+- embedding vs referencing
+- document size limits
+- secondary indexes
+- consistency and transactions
+- denormalization trade-offs
+
+MongoDB is a representative technology, not a default requirement.
 
 ## Search engines
 
-OpenSearch/Elasticsearch are specialized retrieval systems, not substitutes for the transactional database.
-
-Mental model:
-
-```text
-PostgreSQL
-   │ source of truth
-   └── change / indexing pipeline
-             ↓
-       Search index
-             ↓
-       query + ranking
-```
+Search systems are optimized for retrieval rather than transactional truth.
 
 Understand:
 
 - inverted indexes
-- analyzers/tokenization
-- full-text matching
-- filters vs scoring
-- relevance
-- aggregations
-- indexing latency
-- refresh behavior
-- shard/replica concepts
+- analyzers and tokenization
+- relevance scoring
+- filtering vs full-text search
+- facets/aggregations
+- indexing pipelines
+- refresh and eventual consistency
+
+OpenSearch/Elasticsearch are representative technologies.
+
+Typical architecture:
+
+```text
+PostgreSQL
+   │
+   └── change/event
+          ↓
+      indexing worker
+          ↓
+   Search index
+```
+
+The search index is normally a derived projection and can be rebuilt.
 
 ## Vector search
 
-Use vectors when semantic similarity is part of the product behavior.
+Vector databases store embeddings for semantic similarity retrieval.
 
 Understand:
 
 - embeddings
-- cosine/dot-product/distance concepts
-- nearest-neighbor search
-- ANN
-- HNSW
+- cosine/dot-product/L2 similarity
+- approximate nearest neighbors
+- HNSW and index parameters
 - metadata filtering
-- hybrid lexical + semantic retrieval
+- chunking and document identity
+- hybrid lexical + vector retrieval
 - reranking
-- chunking and retrieval quality
+- freshness and deletion
 
-Prefer **pgvector first** when PostgreSQL is already the operational center and the scale/workload fits. Introduce a dedicated vector system when workload or operational needs justify the added system.
+Start with `pgvector` when PostgreSQL is sufficient. Use a dedicated vector system when scale, isolation, or retrieval requirements justify it.
 
-## Retrieval architecture
+## Production concerns
 
-```text
-User query
-   ↓
-Query normalization
-   ↓
-Lexical / vector retrieval
-   ↓
-Metadata filters
-   ↓
-Reranker (optional)
-   ↓
-Context construction
-```
-
-## Failure modes
-
-- stale index
-- missing documents
-- poor chunk boundaries
-- embedding/model mismatch
-- low recall
-- noisy metadata filters
-- vector index memory pressure
-- unbounded context construction
-
-## Design rule
-
-Keep the transactional database authoritative unless the search/vector store is explicitly the source of truth for that workload. Treat derived indexes as rebuildable.
+- index asynchronously where possible
+- make source data authoritative
+- support rebuilds
+- version embedding models
+- attach metadata and source identifiers
+- monitor recall/latency/index size
+- never treat a vector index as the only copy of business data

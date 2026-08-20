@@ -1,100 +1,93 @@
 # Distributed Systems
 
-A distributed system is a system whose important state or execution spans multiple failure domains.
+Distributed systems fail differently from single-process applications because communication, timing, and partial failure become part of the design.
 
-## Core mental model
+## Core model
 
 ```text
-Request
-  ↓
-Service A ─── Service B
-  │               │
-  ↓               ↓
- DB A            DB B
-  │               │
-  └──── Network ──┘
-
-Any network call can be slow, duplicated, reordered, or unavailable.
+Client → Service A → Service B → Database
+            │             │
+            └── network ──┘
 ```
 
-## Core concepts
+Any network call can be slow, duplicated, reordered, dropped, or partially successful.
+
+## Concepts
 
 - latency and tail latency
 - partial failure
 - timeouts
-- retries and exponential backoff with jitter
+- retries with exponential backoff and jitter
 - idempotency
-- ordering
-- consistency
-- availability
-- replication
-- partitioning/sharding
-- leader/follower systems
-- quorum concepts
-- distributed coordination
-- backpressure
 - load shedding
-- cascading failure
-
-## CAP
-
-CAP is a reasoning tool about network partitions and trade-offs between consistency and availability. Do not use it as a slogan to classify every database.
+- backpressure
+- circuit breakers
+- bulkheads
+- replication
+- sharding
+- leader/follower
+- quorum reads/writes
+- strong vs eventual consistency
+- CAP trade-offs
+- distributed transactions
+- consensus concepts
 
 ## Consistency
 
-Distinguish:
+Choose consistency per business invariant rather than globally.
 
-- strong consistency
-- read-your-writes
-- monotonic reads
-- eventual consistency
-- bounded staleness
+Examples:
 
-Choose the weakest model that preserves the product invariant; stronger consistency can cost latency, availability, or operational complexity.
+- account balance: strong consistency
+- analytics dashboard: eventual consistency
+- search index: eventually consistent projection
+- notification delivery: at-least-once with idempotent consumer
 
-## Reliability patterns
+## Idempotency
 
-### Timeout
-Every remote call needs a bounded deadline.
+A retry must not accidentally apply a business operation twice.
 
-### Retry
-Retry only failures that are plausibly transient and only when the operation is safe to repeat.
-
-### Idempotency
-Use an idempotency key or deterministic operation identifier when clients may retry a mutation.
-
-### Circuit breaker
-Stop repeatedly calling a failing dependency and recover after a controlled interval.
-
-### Bulkhead
-Isolate resource pools so failure in one workload cannot exhaust all capacity.
-
-### Outbox
-Commit business state and an outbound event in one local transaction; publish from the outbox asynchronously.
-
-### Saga
-Coordinate a multi-service business workflow with explicit compensating actions instead of assuming a distributed transaction.
-
-## Scaling
-
-- horizontal replication for stateless services
-- partition hot data by a stable key
-- avoid global coordination on the hot path
-- cache only when consistency behavior is understood
-- protect dependencies with concurrency limits
-
-## Failure reasoning
-
-For each dependency ask:
+Typical pattern:
 
 ```text
-What happens if it is:
-- slow?
-- unavailable?
-- returning stale data?
-- returning duplicate responses?
-- partially successful?
-- recovering after a long outage?
+request + idempotency key
+        ↓
+check durable record
+        ↓
+perform operation once
+        ↓
+store result
+        ↓
+return same result on retry
 ```
 
-The answer should be visible in the design, not discovered during the incident.
+## Failure design
+
+Every cross-service dependency should define:
+
+- timeout
+- retry policy
+- retryable errors
+- maximum retry budget
+- fallback or degraded behavior
+- observability signal
+- idempotency behavior
+
+Never blindly retry non-idempotent mutations.
+
+## Replication and sharding
+
+Replication improves availability/read capacity but introduces lag and failover complexity. Sharding increases write/storage scale but makes routing, rebalancing, joins, and transactions harder.
+
+Do not introduce either until a single-node architecture is a measured bottleneck.
+
+## Practical patterns
+
+- transactional outbox
+- inbox/idempotency record
+- saga for multi-service workflows
+- CQRS when read/write models have materially different needs
+- cache-aside
+- lease/heartbeat for worker ownership
+
+The goal is not to use every pattern. The goal is to understand the failure mode each pattern addresses.

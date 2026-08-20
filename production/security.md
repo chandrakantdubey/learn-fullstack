@@ -1,108 +1,99 @@
 # Security Engineering
 
-Security is a property of the whole system, not a library you install.
+Security is a system property, not a middleware checkbox. A Fullstack Engineer should reason about trust boundaries from browser to database and infrastructure.
 
-## Mental model
+## Core model
 
 ```text
-Identity → Authentication → Authorization → Data access → Audit
-                    │
-                    └── Trust boundaries
+Browser
+  ↓ untrusted input
+Edge / CDN / WAF
+  ↓
+Application
+  ↓
+Identity + Authorization
+  ↓
+Data / Services
+  ↓
+Infrastructure
 ```
 
-Threat-model every boundary: browser/server, service/service, service/database, workload/cloud, and human/admin access.
-
-## Application security
+## Application threats
 
 Understand and prevent:
 
 - SQL injection
-- XSS
+- XSS: reflected, stored, DOM-based
 - CSRF
 - SSRF
 - command injection
 - path traversal
-- insecure deserialization
-- broken access control
-- authentication/session flaws
-- sensitive-data exposure
-- rate-limit bypass
+- unsafe deserialization
+- broken object-level authorization
+- insecure direct object references
+- request smuggling and parser disagreement
+- dependency and supply-chain compromise
 
-## Authentication
+## Identity
 
-Know the difference between:
+Know the difference between authentication and authorization.
 
-- password authentication
-- session cookies
-- bearer access tokens
-- refresh tokens
+Understand:
+
+- sessions and secure cookies
 - OAuth 2.0
 - OpenID Connect
-- API keys
+- access vs refresh tokens
+- JWT trade-offs
+- password hashing with Argon2/bcrypt
+- MFA
 - service-to-service identity
+- RBAC and ABAC
+- tenant isolation
 
-For browser applications, prefer secure, HttpOnly, SameSite cookies when a server-managed session is appropriate. Avoid storing long-lived sensitive credentials in browser local storage.
+Prefer secure, short-lived credentials and server-side authorization checks. Do not rely on hidden UI controls for access control.
 
-## Authorization
+## Browser security
 
-Authentication answers **who are you?** Authorization answers **what may you do to this resource?**
+- same-origin policy
+- CORS
+- CSP
+- `HttpOnly`, `Secure`, and `SameSite` cookies
+- clickjacking protection
+- origin and redirect validation
+- safe file uploads
 
-Enforce authorization at the backend resource boundary:
+## Secrets and cryptography
 
-```text
-GET /users/123/tasks/42
-              │
-              └── verify caller may access task 42
-```
-
-Never rely on hidden UI controls for security.
-
-## Passwords and secrets
-
-- use a modern password hashing algorithm such as Argon2id where supported
-- never log passwords, tokens, or secrets
-- use a secret manager in production
+- never commit secrets
+- use a secrets manager
 - rotate credentials
-- use short-lived credentials where practical
-- least privilege by default
+- encrypt in transit and at rest
+- understand hashing vs encryption vs signing
+- use vetted cryptographic libraries rather than custom algorithms
 
-## Transport and data protection
+## Infrastructure security
 
-- TLS for network paths
-- encryption at rest for sensitive stores
-- strict certificate validation
-- avoid plaintext internal traffic unless the threat model explicitly permits it
-- redact sensitive fields from logs and traces
+- least-privilege IAM
+- private subnets for data services
+- security groups and network policies
+- TLS everywhere practical
+- container non-root execution
+- dependency/image scanning
+- audit logs
+- controlled administrative access
 
-## Cloud security
+## Production security checklist
 
-- IAM roles over static credentials
-- least privilege policies
-- separate production and non-production accounts/environments
-- private subnets for databases where appropriate
-- security groups as explicit network boundaries
-- centralized audit logging
-- deny-by-default network posture
+Before production, verify:
 
-## Secure defaults
+1. every resource access is authorized server-side
+2. untrusted input is validated at boundaries
+3. secrets are externalized
+4. security-sensitive events are logged without leaking secrets
+5. dependencies and images are scanned
+6. database roles are least-privilege
+7. public network exposure is intentional
+8. incident credentials can be revoked and rotated
 
-- validate input at boundaries
-- use parameterized SQL
-- constrain file uploads
-- apply rate limits
-- set security headers
-- configure CORS narrowly
-- use dependency and image scanning
-- patch base images and libraries
-
-## Production proof
-
-For every application, document:
-
-1. trust boundaries
-2. authentication mechanism
-3. authorization rules
-4. secret lifecycle
-5. abuse cases
-6. audit events
-7. incident response path
+Security decisions should be documented with the threat they address, not just the tool being used.
