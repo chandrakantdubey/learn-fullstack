@@ -1,19 +1,54 @@
 # Foundations
 
-The foundational layer explains the mechanics underneath frontend, backend, databases, containers, and cloud platforms.
+The foundational layer explains the mechanics underneath frontend, backend, databases, containers, cloud and AI applications.
 
 ## Topics
 
-1. Programming and runtime mental models
-2. Data structures and complexity
-3. Operating systems and Linux
-4. Networking
-5. Web platform and HTTP
-6. Concurrency and asynchronous systems
-7. Software engineering principles
-8. Git and collaboration
+### Programming
 
-The goal is not to become a computer-science specialist. The goal is to understand enough of the underlying machine and network to reason about application behavior.
+- values, references, mutability and memory
+- functions, closures, modules and errors
+- types and generics
+- collections and complexity
+- parsing vs validation
+- regular expressions
+- Unicode and text processing
+- bytes, encoding and serialization
+- hashing and checksums
+- randomness and secure randomness
+- numeric precision
+- dates, time zones and clocks
+
+### Systems
+
+- processes and threads
+- virtual memory
+- filesystems and file descriptors
+- event loops
+- concurrency and synchronization
+- CPU vs I/O
+- resource limits and lifecycle
+- signals and graceful shutdown
+
+### Security
+
+- threat modeling
+- authentication and authorization
+- cryptographic primitives
+- password hashing
+- sessions/tokens
+- secrets and key management
+- common web attack classes
+
+### Engineering
+
+- Git and collaboration
+- testing fundamentals
+- debugging
+- API contracts
+- error handling
+- observability
+- performance reasoning
 
 ## Dependency map
 
@@ -21,10 +56,16 @@ The goal is not to become a computer-science specialist. The goal is to understa
 Programming
    ├── Data Structures
    ├── Runtime
+   ├── Text / Encoding
    └── Concurrency
 
 Operating Systems ──┐
-                     ├── Networking ── Web / HTTP ── Frontend / Backend
-                     │
-Git ── Engineering ──┘
+                    ├── Networking ── Web / HTTP ── Frontend / Backend
+Security ───────────┘
+
+Git ── Testing ── Observability ── Production
 ```
+
+## Principle
+
+Learn the mechanism before the abstraction. Framework knowledge becomes much easier once the underlying boundary is understood.
