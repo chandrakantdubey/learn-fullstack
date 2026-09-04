@@ -4,10 +4,10 @@ This is the implementation index for the canonical 20-section master skill unive
 
 | # | Master section | Primary home | Fullstack role |
 |---|---|---|---|
-| 1 | CS / Engineering Fundamentals | `learn-dsa`, `learn-js-ts`, `learn-python` | cross-language mental models, runtime/resource implications |
+| 1 | CS / Engineering Fundamentals | `learn-dsa`, `learn-js-ts`, `learn-python` | cross-language mental models, runtime/resource implications; cross-cutting foundations live here |
 | 2 | Networking | `learn-fullstack` | protocols, topology, service boundaries |
 | 3 | Linux | `learn-fullstack` | OS/resource mental models and troubleshooting |
-| 4 | Databases | `learn-sql` | application consistency, cache/search integration |
+| 4 | Databases | `learn-sql` | application consistency, cache/search/vector integration |
 | 5 | Backend | `learn-backend` | end-to-end service architecture |
 | 6 | Frontend | `learn-frontend` | browser/API/system boundaries |
 | 7 | Fullstack Engineering | `learn-fullstack` | primary owner |
@@ -25,9 +25,30 @@ This is the implementation index for the canonical 20-section master skill unive
 | 19 | Engineering Practices | `learn-fullstack` | primary owner |
 | 20 | Interview Skills | `learn-fullstack` + `learn-dsa` | verification and defense |
 
+## Cross-cutting gap closure
+
+The Fullstack repository now has canonical concept documents for:
+
+- regex and parsing
+- Unicode, normalization, bytes, encoding and serialization
+- money and numeric precision
+- dates, time zones, clocks and randomness
+- cryptography
+- HTTP semantics and caching
+- DNS, TCP/UDP/QUIC and TLS
+- browser trust boundaries
+- realtime and streaming
+- concurrency and cancellation
+- resource lifecycle and graceful shutdown
+- API contracts and schema evolution
+- BFF and gateway boundaries
+- data consistency and messaging
+- reliability and recovery
+- AI application architecture
+
 ## Status semantics
 
-**Primary home** means the repository is responsible for the deep implementation material.
+**Primary home** means the repository is responsible for deep implementation material.
 
 **Fullstack role** means the integrated repository explains how that capability interacts with the rest of the system. It is not a duplicate course.
 
