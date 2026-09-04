@@ -6,8 +6,6 @@ The goal is not to memorize frameworks. The goal is to understand how modern sof
 
 ## The nine-repository system
 
-`learn-fullstack` is the integration layer across the specialized repositories:
-
 | Repository | Deep source |
 |---|---|
 | `learn-js-ts` | JavaScript / TypeScript |
@@ -20,7 +18,13 @@ The goal is not to memorize frameworks. The goal is to understand how modern sof
 | `learn-dsa` | DSA / algorithms — complete |
 | `learn-fullstack` | Cross-layer synthesis and production engineering |
 
-The source repositories remain specialized. This repository connects them into one engineering mental model instead of copying nine courses into one place.
+The source repositories remain specialized. This repository connects them into one engineering mental model instead of copying nine courses together.
+
+## Canonical master checklist
+
+**[`docs/master-skill-universe.md`](docs/master-skill-universe.md)** is the single 20-section checklist. It is the authoritative placement map for the complete skill universe.
+
+`MASTER-COVERAGE.md` and each specialized repository's `MASTER-COVERAGE.md` make the ownership explicit at repository level.
 
 ## Core learning model
 
@@ -92,13 +96,11 @@ learn-fullstack/
 ├── architecture/      # system design and architectural trade-offs
 ├── fullstack-patterns/ # cross-layer application patterns
 ├── technologies/      # one canonical note per technology
-├── projects/          # production-oriented integration projects
-└── docs/              # skill map, source map, module map and gap tracking
+├── projects/           # production-oriented integration projects
+└── docs/               # master map, skill graph, source map, audits and verification
 ```
 
 ## Cross-cutting knowledge owned here
-
-Some capabilities do not belong exclusively to frontend, backend, Python, SQL, Docker or AI. They are intentionally first-class Fullstack material:
 
 - regex and text processing
 - Unicode, encoding and serialization
@@ -120,8 +122,6 @@ Some capabilities do not belong exclusively to frontend, backend, Python, SQL, D
 
 One technology gets one canonical note under `technologies/` even when it is used in several layers. Zod is the canonical example: `technologies/shared/zod.md` is the single source instead of separate frontend/backend copies.
 
-Concepts remain separate from technology notes.
-
 ## Learning style
 
 This is deliberately **not a conventional course**. A strong topic should answer:
@@ -137,24 +137,22 @@ This is deliberately **not a conventional course**. A strong topic should answer
 9. How do we secure, test and observe it?
 10. What should I build to prove I understand it?
 
-## Deep ingestion
+## Verification and integration
 
-The eight non-DSA repositories are analyzed as source material, then consolidated by ownership and dependency rather than copied wholesale.
-
-- [`docs/source-ingestion.md`](docs/source-ingestion.md) — source-by-source ingestion and consolidation matrix
-- [`docs/skill-map.md`](docs/skill-map.md) — complete capability map
-- [`docs/module-map.md`](docs/module-map.md) — nine-source ownership model
+- [`docs/master-skill-universe.md`](docs/master-skill-universe.md) — canonical 20-section master checklist
+- [`docs/coverage-matrix.md`](docs/coverage-matrix.md) — section-by-section ownership
+- [`docs/final-skill-graph.md`](docs/final-skill-graph.md) — dependency graph
+- [`docs/source-ingestion.md`](docs/source-ingestion.md) — source consolidation rules
+- [`docs/module-map.md`](docs/module-map.md) — module ownership
 - [`docs/source-map.md`](docs/source-map.md) — what belongs where
-- [`docs/cross-cutting-gaps.md`](docs/cross-cutting-gaps.md) — missing cross-layer knowledge
-- [`docs/integration-status.md`](docs/integration-status.md) — integration status and quality bar
-- [`docs/interview-map.md`](docs/interview-map.md) — interview and system-design verification
+- [`docs/cross-cutting-gaps.md`](docs/cross-cutting-gaps.md) — cross-layer gaps
+- [`docs/integration-status.md`](docs/integration-status.md) — integration status
+- [`docs/interview-map.md`](docs/interview-map.md) — interview/system-design verification
 - [`technologies/README.md`](technologies/README.md) — canonical technology notes
 - [`technologies/registry.md`](technologies/registry.md) — technology inventory
 - [`projects/README.md`](projects/README.md) — production project portfolio
-- [`projects/project-specs.md`](projects/project-specs.md) — detailed project acceptance criteria
+- [`projects/project-specs.md`](projects/project-specs.md) — project acceptance criteria
 
 ## Status
 
-The integration architecture is established and the first cross-cutting gaps are implemented. The current pass is deep ingestion of the eight non-DSA source repositories, followed by strengthening canonical technology notes, wiring source references into the skill graph, and building the project/interview/production verification layer.
-
-The rule remains: specialized repositories own depth; `learn-fullstack` owns synthesis, cross-layer behavior and production judgment. `learn-dsa` remains complete.
+The nine-repository integration and master ownership map are now established. Specialized repositories own their domain depth; `learn-fullstack` owns cross-layer synthesis, production engineering, architecture, projects and verification.
