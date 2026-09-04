@@ -2,13 +2,26 @@
 
 The stack is intentionally opinionated. Alternatives are introduced only when they illuminate a meaningful engineering trade-off.
 
+Technology-specific notes live under `technologies/`. **One technology has one canonical note**, even when that technology is used by multiple layers.
+
 ## Languages
 
-| Role | Default | Why |
-| --- | --- | --- |
-| Browser + typed application code | TypeScript | Strong web ecosystem and end-to-end typing |
-| Backend + AI | Python | Excellent ecosystem for APIs, data, ML, and AI |
-| Systems exposure | C/C++ concepts | Understand memory, compilation, and low-level behavior without making it a primary application language |
+| Role | Default |
+| --- | --- |
+| Browser + typed application code | TypeScript |
+| Backend + AI | Python |
+| Systems exposure | C/C++ concepts |
+
+## Shared Technologies
+
+| Technology | Role |
+| --- | --- |
+| Zod | Runtime schemas for TypeScript applications and services |
+| OpenAPI | REST contract description |
+| Git | Version control |
+| Linux | Operating-system foundation |
+
+See `technologies/registry.md` for the complete working list.
 
 ## Web / Frontend
 
@@ -22,11 +35,12 @@ The stack is intentionally opinionated. Alternatives are introduced only when th
 | Client state | Zustand; Redux Toolkit when complexity justifies it |
 | Server state | TanStack Query |
 | Forms | React Hook Form |
-| Runtime validation | **Zod** |
 | Browser testing | Playwright |
 | Unit/component testing | Vitest + Testing Library |
 | Build tooling | Vite where a standalone frontend is appropriate; Next.js tooling otherwise |
 | Package manager | pnpm |
+
+Zod is shared; it is intentionally not duplicated as a separate frontend technology note.
 
 ## TypeScript Backend
 
@@ -34,7 +48,6 @@ The stack is intentionally opinionated. Alternatives are introduced only when th
 | --- | --- |
 | Runtime | Node.js |
 | HTTP service | Fastify |
-| Runtime validation | **Zod** |
 | API contract | OpenAPI where REST is used |
 | HTTP client | native `fetch` |
 | PostgreSQL | `pg` |
@@ -42,6 +55,8 @@ The stack is intentionally opinionated. Alternatives are introduced only when th
 | Cache | Redis |
 | Background jobs | BullMQ or a focused worker |
 | Logging | Pino |
+
+Zod is the shared TypeScript runtime-schema technology.
 
 ## Python Backend / AI
 
@@ -56,29 +71,6 @@ The stack is intentionally opinionated. Alternatives are introduced only when th
 | Testing | pytest |
 | AI / ML | PyTorch + scikit-learn |
 
-## Validation rule
-
-Zod and Pydantic are runtime boundary tools, not substitutes for domain modeling.
-
-```text
-untrusted input
-      ↓
-Zod / Pydantic
-      ↓
-validated command
-      ↓
-authentication / authorization
-      ↓
-domain/application logic
-      ↓
-data / external systems
-```
-
-See:
-
-- `frontend/concepts/runtime-validation.md`
-- `backend/concepts/api-contracts-and-validation.md`
-
 ## Data
 
 | Purpose | Default |
@@ -89,7 +81,7 @@ See:
 | Search | OpenSearch/Elasticsearch concepts |
 | Vector search | pgvector first; dedicated vector DB when justified |
 
-## Distributed systems
+## Distributed Systems
 
 | Purpose | Default |
 | --- | --- |
@@ -104,12 +96,14 @@ See:
 | --- | --- |
 | OS | Linux |
 | Containers | Docker |
+| Local orchestration | Docker Compose |
 | Orchestration | Kubernetes |
+| Kubernetes packaging | Helm |
 | Cloud | AWS |
 | IaC | Terraform |
 | CI/CD | GitHub Actions |
 
-## Production engineering
+## Production Engineering
 
 | Capability | Default |
 | --- | --- |
@@ -121,7 +115,7 @@ See:
 | Security | OWASP guidance + cloud IAM + secrets management |
 | Load testing | k6 |
 
-## AI extension
+## AI Extension
 
 | Capability | Default |
 | --- | --- |
