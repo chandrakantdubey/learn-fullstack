@@ -1,73 +1,68 @@
 # Source Map
 
-`learn-fullstack` integrates existing repositories. It does not replace them and should not become a copy of them.
+`learn-fullstack` is the integration layer for the nine learning repositories. The specialized repositories remain the deep sources of truth; this repository turns their knowledge into one coherent Fullstack + AI Engineering skill system.
 
-## Repositories
+## Nine source repositories
 
-| Source | Keep as source of truth | Bring into `learn-fullstack` | Treatment |
-| --- | --- | --- | --- |
-| `learn-python` | Python language depth, stdlib, packaging, async, concurrency | Python-for-fullstack concepts, runtime model, production conventions | Summarize and cross-link; avoid duplicating the full Python curriculum |
-| `learn-js-ts` | JS/TS language depth and runtime mechanics | JS runtime model, TypeScript engineering, Node.js fundamentals | Extract principles and stack decisions |
-| `learn-frontend` | Browser, HTML/CSS, React, Next.js, frontend architecture | Browser/web fundamentals, frontend architecture, client/server boundaries, performance | Rewrite around capabilities rather than weekly course phases |
-| `learn-backend` | APIs, services, backend architecture, databases, distributed systems | Backend principles, API design, async systems, reliability | Merge the strongest concepts; remove duplicated resource lists |
-| `learn-sql` | SQL and relational database depth | Data modeling, transactions, indexing, query planning, PostgreSQL engineering | Keep DB-specific depth in source repo and teach integration here |
-| `learn-docker` | Docker mechanics and container practice | Container mental model, production image workflow, networking, debugging | Integrate into infrastructure path |
-| `learn-dsa` | DSA problem-solving depth | Only CS concepts that improve engineering judgment | Keep full problem set elsewhere |
-| `learn-ai` | ML/LLM/AI engineering depth | The bridge from Fullstack Engineering to AI Engineering | Avoid turning this repo into the AI curriculum |
+| Source repository | Primary material | Integration into `learn-fullstack` |
+| --- | --- | --- |
+| `learn-js-ts` | JavaScript/TypeScript language and runtime | Programming foundations, JS runtime, TypeScript application engineering |
+| `learn-frontend` | Browser, HTML/CSS, React, frontend architecture | Web platform, UI architecture, rendering, performance, accessibility |
+| `learn-backend` | Backend engineering, APIs, services, distributed systems | HTTP/API design, service architecture, async systems, reliability |
+| `learn-python` | Python language, stdlib, async, packaging, production | Python engineering and the Python backend/AI path |
+| `learn-sql` | SQL and PostgreSQL | Relational modeling, SQL, transactions, indexing, query planning |
+| `learn-docker` | Containers and Docker operations | Container fundamentals, image engineering, networking and deployment |
+| `learn-dsa` | Data structures and algorithms | Interview problem solving and engineering complexity judgment |
+| `learn-ai` | AI/ML/LLM engineering | AI engineering foundations, LLM applications, RAG, agents, inference and evaluation |
+| `learn-fullstack` | Existing integrated material | Canonical cross-layer architecture, stack decisions, projects and preparation plan |
 
-## Integration Rules
+## Integration rules
 
 ### 1. Principles before products
 
-Prefer:
+Teach the underlying system before the framework:
 
-- HTTP before FastAPI/Express
-- SQL before SQLAlchemy/Prisma
+- HTTP before FastAPI/Fastify
+- SQL before SQLAlchemy/ORMs
 - browser architecture before React
 - containers before Kubernetes
 - Linux/networking before cloud abstractions
-- distributed-systems principles before Kafka
+- distributed-systems principles before Kafka/SQS
+- model/inference fundamentals before LLM frameworks
 
 ### 2. One concept, one canonical explanation
 
-When the same concept exists in multiple repositories, `learn-fullstack` should contain the integrated explanation and link back to the specialized deep dive.
+If several source repositories explain the same concept, consolidate the strongest explanation here. Do not create competing copies.
 
-### 3. No framework soup
+### 3. Specialized depth stays specialized
 
-A topic should have a small default stack plus alternatives only when they teach an important trade-off.
+Do not blindly copy entire source repositories. Preserve them as deep references and pull the material that is necessary to make a fullstack engineer understand how layers connect.
 
-### 4. Production context is mandatory
+### 4. One technology, one canonical technology note
 
-Every significant technology should eventually answer:
+Technology-specific material belongs under `technologies/`. A technology used by multiple layers gets one canonical file. For example, Zod lives in `technologies/shared/zod.md`, not separate frontend and backend copies.
 
-- failure modes
-- security implications
-- observability
-- performance
-- scalability
-- cost
-- deployment
-- testing
+### 5. Production context is mandatory
 
-### 5. Projects integrate layers
+Important topics should eventually cover failure modes, security, observability, performance, scalability, cost, deployment and testing.
 
-Projects should cross boundaries. Prefer:
+### 6. Projects integrate layers
+
+Prefer projects that force boundaries to work together:
 
 ```text
-Browser → API → Database → Cache → Queue → Worker → Observability
+Browser → API → Database → Cache → Queue → Worker → AI → Observability
 ```
 
-over isolated framework demos.
+## Planned ingestion order
 
-## Expected Output of a Topic
+1. Programming: `learn-js-ts`, `learn-python`
+2. Web platform and frontend: `learn-frontend`
+3. Backend and distributed systems: `learn-backend`
+4. Data: `learn-sql`
+5. Containers/infrastructure: `learn-docker`
+6. AI engineering: `learn-ai`
+7. Interview problem solving: `learn-dsa`
+8. Cross-layer synthesis: existing `learn-fullstack` material
 
-A mature topic should eventually contain:
-
-```text
-concept.md              # mental model and principles
-implementation.md       # practical implementation
-production.md            # reliability/security/performance concerns
-stack.md                 # Python + TypeScript choices
-project.md               # applied exercise or project slice
-references.md            # selective external references
-```
+The result should be a coherent skill graph, not nine pasted courses.
