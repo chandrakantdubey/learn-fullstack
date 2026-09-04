@@ -1,195 +1,286 @@
-# Fullstack Skill Map
+# Fullstack + AI Engineering Skill Map
 
-This file is the curated map for the stack represented by this repository. It separates durable engineering capabilities from implementation choices and keeps the default stack intentionally small.
+This is the integrated skill map for the nine-repository learning system. `learn-dsa` is complete. The other specialized repositories remain deep sources; `learn-fullstack` owns synthesis, cross-layer engineering, architecture and gaps that do not belong naturally to one source.
 
-## 1. Foundations
+## 0. Programming foundations
 
-- Programming fundamentals
-- Data structures and algorithms
-- Type systems and generics
-- Error handling
-- Testing fundamentals
-- Git and GitHub
-- Linux and shell
-- Processes, memory, files, and networking basics
+- variables, values, references and mutability
+- expressions, control flow and functions
+- collections and data modeling
+- recursion and iteration
+- errors and exception boundaries
+- modules, packages and dependency boundaries
+- generics and type systems
+- runtime vs compile-time guarantees
+- regular expressions
+- parsing vs validation
+- Unicode, normalization, strings and graphemes
+- bytes, encodings, base64 and serialization
+- hashing, checksums and content addressing
+- randomness and secure randomness
+- floating point, precision and money
+- dates, time zones and monotonic clocks
+- resource ownership and cleanup
+- DSA and complexity through `learn-dsa`
 
-## 2. Web Platform
+## 1. Web platform
 
-- HTML semantics
-- CSS layout and rendering
-- Browser architecture
+- HTML semantics and accessibility
+- CSS layout, cascade and rendering
 - DOM and Web APIs
-- HTTP
+- browser architecture
+- rendering pipeline and main-thread work
+- storage and browser lifecycle
+- same-origin policy
+- CORS
+- CSP
+- cookies and sessions
+- CSRF and XSS
+- HTTP semantics
+- HTTP caching and conditional requests
 - DNS
-- TLS
-- Cookies and sessions
-- CORS / CSP / same-origin policy
-- WebSockets / SSE
-- Browser performance
+- TCP/UDP/QUIC
+- TLS and certificate trust
+- proxies and load balancers
+- HTTP/2 and HTTP/3 concepts
+- streaming responses
+- SSE and WebSockets
+- uploads/downloads
 
-## 3. TypeScript Application Engineering
+## 2. Frontend engineering
 
-**Primary stack:** TypeScript → React → Next.js → Node.js/Fastify
+**Primary:** TypeScript → React → Next.js
 
-- Strict TypeScript
-- Modules and package boundaries
-- Runtime vs compile-time types
-- Runtime validation
-- API contracts
-- Error/result modeling
-- React component architecture
-- Client state vs server state
-- TanStack Query
-- React Hook Form
-- **Zod**
-- Tailwind CSS
-- Radix UI / shadcn/ui
-- Zustand / Redux Toolkit when justified
-- Vite
-- Vitest
-- Playwright
-- pnpm
+- component architecture and composition
+- rendering/reconciliation
+- server/client boundaries
+- data fetching and mutations
+- client state vs server state
+- forms and validation
+- accessibility
+- performance and Core Web Vitals
+- caching and invalidation
+- optimistic UI
+- error/loading/empty states
+- authentication UX without trusting the client for authorization
+- frontend testing
+- observability and production debugging
+- Tailwind CSS, Radix UI, shadcn/ui
+- Zustand, TanStack Query, React Hook Form
+- Vite, pnpm, Vitest, Playwright
 
-## 4. Python Engineering
+## 3. Backend and API engineering
 
-**Primary stack:** Python → FastAPI → Pydantic → SQLAlchemy → PostgreSQL
+**Primary:** Python/FastAPI and TypeScript/Node.js/Fastify
 
-- Python runtime and standard library
-- Type hints
-- Packaging and dependency management
-- asyncio / concurrency
-- FastAPI
-- Pydantic
-- SQLAlchemy
-- Alembic
-- httpx
-- Celery / workers
-- pytest
+- HTTP/API semantics
+- REST, OpenAPI, GraphQL and gRPC awareness
+- API contracts and schema evolution
+- DTO vs domain model
+- validation and business invariants
+- error contracts
+- authentication and authorization
+- OAuth/OIDC mental model
+- sessions and token lifecycle
+- pagination/filtering/sorting
+- idempotency
+- rate limiting
+- timeouts/deadlines
+- retries and retry storms
+- cancellation
+- background jobs
+- queues and event-driven architecture
+- modular monoliths and service boundaries
+- dependency isolation
+- graceful shutdown
 
-## 5. Backend & APIs
+## 4. Data engineering
 
-- REST
-- OpenAPI
-- GraphQL
-- gRPC
-- WebSockets
-- API versioning
-- Pagination / filtering / sorting
-- Validation
-- Authentication / authorization
-- Idempotency
-- Rate limiting
-- Timeouts / retries
-- Background jobs
-- Event-driven architecture
-- Modular monoliths
-- Service boundaries
-
-## 6. Data
-
+- relational modeling
 - SQL
 - PostgreSQL
-- Transactions / isolation / MVCC
-- Indexing / query planning
-- Redis
-- Caching
-- MongoDB concepts
-- Search / OpenSearch
-- pgvector
-- Vector retrieval / ANN / HNSW
+- transactions
+- isolation and MVCC
+- locks and contention
+- indexes and query planning
+- connection pooling
+- migrations
+- JSON/JSONB
+- replication and partitioning concepts
+- Redis and cache design
+- cache invalidation/TTL/eviction
+- MongoDB document-model awareness
+- search/OpenSearch concepts
+- vectors/embeddings/pgvector
+- data lifecycle and schema evolution
+- backups, restore and recovery
 
-## 7. Distributed Systems
+## 5. Distributed systems
 
-- Queues and streams
+- network failure and partial failure
+- consistency models
+- availability/capacity trade-offs
+- queues vs streams
 - Kafka
-- SQS
-- EventBridge
-- Delivery semantics
-- Ordering
-- Consumer groups
-- Backpressure
-- Outbox pattern
-- Sagas
-- Circuit breakers
-- Load shedding
-- Eventual consistency
-- Replication / sharding
+- SQS/EventBridge
+- ordering and partitioning
+- delivery semantics
+- deduplication
+- consumer groups
+- backpressure
+- load shedding
+- idempotent consumers
+- outbox/inbox patterns
+- sagas/workflows
+- circuit breakers
+- bulkheads
+- replication/sharding
+- eventual consistency
 
-## 8. Infrastructure & Cloud
+## 6. Systems and operating environment
 
-- Linux
+- Linux and shell
+- processes and threads
+- virtual memory
+- filesystems and file descriptors
+- event loops
+- concurrency and synchronization
+- CPU vs I/O workloads
+- resource limits
+- signals and process lifecycle
+- graceful shutdown
+- profiling
+- CPU/memory/network/disk saturation
+- container runtime mental model
+
+## 7. Infrastructure and cloud
+
 - Docker
+- image layers and registries
+- container networking/storage
 - Docker Compose
-- Kubernetes
+- Kubernetes primitives
+- scheduling, probes and resources
+- deployments and rollouts
 - Helm
-- AWS
-- Terraform
-- GitHub Actions
-- Container registries
-- Networking / VPCs
+- AWS fundamentals
+- VPC/networking
 - IAM
-- Secrets management
+- secrets management
+- Terraform/IaC
+- GitHub Actions
+- CI/CD
+- environments and configuration
 
-## 9. Production Engineering
+## 8. Production engineering
 
-- Security
-- Testing strategy
-- Observability
+- threat modeling
+- OWASP classes
+- cryptography fundamentals
+- secure password/session/token design
+- secret/key lifecycle
+- least privilege
+- supply-chain security
+- testing pyramid and test boundaries
+- unit/integration/contract/E2E tests
+- load testing
+- observability
+- logs, metrics and traces
 - OpenTelemetry
-- Prometheus
-- Grafana
-- Structured logging
-- Distributed tracing
-- Reliability
-- SLOs / SLIs
-- Capacity planning
-- Load testing
-- Performance profiling
-- Incident response
+- Prometheus/Grafana
+- SLIs/SLOs/error budgets
+- capacity planning
+- incident response
+- graceful degradation
+- feature flags
+- backups/restore
+- RPO/RTO
+- rollback and recovery
 
-## 10. AI / ML Engineering
+## 9. Architecture and system design
 
-- AI / ML fundamentals
-- Neural networks
-- Deep learning
+- requirements and constraints
+- domain boundaries
+- modular monolith vs services
+- API/gateway/BFF patterns
+- data ownership
+- synchronous vs asynchronous flows
+- transaction boundaries
+- consistency choices
+- caching architecture
+- search architecture
+- messaging architecture
+- multi-region concepts
+- scalability and capacity
+- reliability and failure isolation
+- security architecture
+- observability architecture
+- cost modeling
+- migration strategy
+- architectural trade-offs
+
+## 10. AI/ML engineering
+
+- AI/ML fundamentals
+- classical ML
+- neural networks
+- deep learning
 - NLP
-- Tokenization
-- Embeddings
-- Attention
-- Transformers
-- Language models
+- tokenization
+- embeddings
+- attention
+- transformers
+- language models
 - LLMs
-- Prompt engineering
-- Model APIs
-- Fine-tuning / LoRA / QLoRA
-- Distillation
+- inference
+- prompting
+- structured outputs
+- tool calling
+- fine-tuning
+- LoRA/QLoRA
+- distillation
 - RAG
-- Retrieval / reranking
-- Evaluation
-- Guardrails
-- Agent workflows
-- Tool use / MCP
-- Inference optimization
-- Model serving
+- chunking/retrieval/reranking
+- evaluation
+- guardrails
+- prompt injection
+- agents and deterministic workflows
+- MCP
+- model routing
+- inference serving
+- latency/cost/capacity
+- AI observability
 
-## Cross-layer rule
+## Cross-layer engineering rule
 
-A technology belongs in the repository only when its role in the system is clear.
+For every important capability, understand:
 
 ```text
-Concept
-  ↓
-Why it exists
-  ↓
-System boundary
-  ↓
-Canonical technology
-  ↓
-Python / TypeScript implementation
-  ↓
-Failure + security + performance
-  ↓
-Production usage
+problem
+ ↓
+mental model
+ ↓
+constraints / invariants
+ ↓
+trust boundary
+ ↓
+API / data contract
+ ↓
+implementation
+ ↓
+failure modes
+ ↓
+security
+ ↓
+performance / scale
+ ↓
+observability
+ ↓
+testing
+ ↓
+production operation
 ```
 
-The goal is not to collect every library. The goal is to know the important concepts deeply and recognize the right tool for the job.
+Technology is the implementation choice, not the mental model.
+
+See [`docs/module-map.md`](module-map.md) and [`docs/cross-cutting-gaps.md`](cross-cutting-gaps.md) for ownership and missing-topic tracking.
