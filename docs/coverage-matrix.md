@@ -1,50 +1,44 @@
 # Fullstack Competency Coverage
 
-This matrix tracks the Fullstack Engineering model against the repository and points each capability at one canonical location.
+This is the implementation index for the canonical 20-section master skill universe in `docs/master-skill-universe.md`.
 
-| Domain | Status | Canonical location |
-| --- | --- | --- |
-| Programming fundamentals | Covered | `foundations/` |
-| Web / Internet | Covered | `web/`, `systems/networking/` |
-| Frontend engineering | Covered | `frontend/` |
-| TypeScript application engineering | Covered | `typescript/`, `typescript-stack.md` |
-| Runtime validation / Zod | Covered | `frontend/concepts/runtime-validation.md`, `backend/concepts/api-contracts-and-validation.md` |
-| Backend engineering | Covered | `backend/` |
-| Python engineering | Integration track | `python/`; full depth in `learn-python` |
-| Relational data | Covered | `data/concepts/`, `data/postgresql.md` |
-| Redis / caching | Covered | `data/concepts/redis.md` |
-| NoSQL | Covered | `data/nosql-search-vectors.md` |
-| Search | Covered | `data/nosql-search-vectors.md` |
-| Vector databases | Covered | `data/nosql-search-vectors.md` |
-| Linux | Covered | `systems/linux/` |
-| Networking | Covered | `systems/networking/` |
-| Distributed systems | Covered | `systems/distributed-systems.md` |
-| Messaging / events | Covered | `backend/concepts/messaging-and-events.md` |
-| Security | Covered | `production/security.md`, `backend/concepts/authentication-and-security.md` |
-| Testing | Covered | `production/`, frontend testing notes |
-| Observability | Covered | `production/observability.md` |
-| Reliability | Covered | `production/reliability.md` |
-| Performance | Covered | `production/performance-and-capacity.md`, frontend performance |
-| Capacity planning | Covered | `production/performance-and-capacity.md` |
-| Docker | Covered | `infrastructure/docker.md` |
-| Kubernetes | Covered | `infrastructure/kubernetes.md` |
-| Cloud | Covered | `infrastructure/aws.md`, `infrastructure/cloud-architecture.md` |
-| Terraform / IaC | Covered | `infrastructure/terraform.md` |
-| CI/CD | Covered | `infrastructure/ci-cd.md` |
-| System design | Covered | `architecture/` |
-| AI engineering bridge | Integration track | `docs/skill-map.md`, `docs/stack.md`; `learn-ai` remains the deep-dive source |
-| DSA / CS | Integration track | `learn-dsa` remains the deep-dive source |
+| # | Master section | Primary home | Fullstack role |
+|---|---|---|---|
+| 1 | CS / Engineering Fundamentals | `learn-dsa`, `learn-js-ts`, `learn-python` | cross-language mental models, runtime/resource implications |
+| 2 | Networking | `learn-fullstack` | protocols, topology, service boundaries |
+| 3 | Linux | `learn-fullstack` | OS/resource mental models and troubleshooting |
+| 4 | Databases | `learn-sql` | application consistency, cache/search integration |
+| 5 | Backend | `learn-backend` | end-to-end service architecture |
+| 6 | Frontend | `learn-frontend` | browser/API/system boundaries |
+| 7 | Fullstack Engineering | `learn-fullstack` | primary owner |
+| 8 | AI Engineering | `learn-ai` | AI product/system integration |
+| 9 | Cloud | `learn-fullstack` + `learn-docker` | architecture, service selection and deployment |
+| 10 | Containers | `learn-docker` | application-to-runtime deployment path |
+| 11 | Kubernetes | `learn-docker` | architecture and trade-offs in Fullstack |
+| 12 | IaC / DevOps | `learn-fullstack` + `learn-docker` | infrastructure/release synthesis |
+| 13 | Observability / SRE | `learn-fullstack` | primary owner |
+| 14 | Security | `learn-fullstack` + specialized implementations | cross-stack threat model and controls |
+| 15 | System Design | `learn-fullstack` | primary owner |
+| 16 | Architecture / Code Design | `learn-fullstack` | primary owner |
+| 17 | Testing / Quality | `learn-fullstack` + specialized implementations | strategy and quality gates |
+| 18 | Developer Tooling | each specialized repo | integrated workflow and standards |
+| 19 | Engineering Practices | `learn-fullstack` | primary owner |
+| 20 | Interview Skills | `learn-fullstack` + `learn-dsa` | verification and defense |
 
-## Meaning of status
+## Status semantics
 
-**Covered** means the integrated Fullstack repository contains a first-class explanation of the capability and its production implications.
+**Primary home** means the repository is responsible for the deep implementation material.
 
-**Integration track** means this repository defines how the capability fits Fullstack Engineering while the specialized repository remains the deeper source of truth.
+**Fullstack role** means the integrated repository explains how that capability interacts with the rest of the system. It is not a duplicate course.
 
-## Curation rule
+## Canonical technology rule
 
-The repository should have a small canonical stack. Large technology inventories are reference material, not a list of things to learn simultaneously. New tools should be added to the appropriate capability first and only then included in inventories when they have a clear role.
+A technology has one canonical note under `technologies/`. Concepts are separate from technology notes. For example, Zod is shared through `technologies/shared/zod.md` rather than duplicated across frontend/backend sections.
 
-## Original model preserved
+## Completion gate
 
-The repository is not intended to replace specialized repositories. It is the integration layer that connects them into one production engineering mental model.
+Coverage is not a keyword checklist. Each important capability must ultimately support:
+
+**Understand → Implement → Debug → Measure → Secure → Test → Scale → Operate → Defend trade-offs.**
+
+The master list, source maps, projects and interview map are the verification chain.
