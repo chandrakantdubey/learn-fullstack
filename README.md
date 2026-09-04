@@ -38,6 +38,8 @@ Canonical technologies
 Production patterns
    ↓
 End-to-end projects
+   ↓
+Interview defense
 ```
 
 ## Fullstack engineer model
@@ -135,16 +137,24 @@ This is deliberately **not a conventional course**. A strong topic should answer
 9. How do we secure, test and observe it?
 10. What should I build to prove I understand it?
 
-## Navigation
+## Deep ingestion
 
+The eight non-DSA repositories are analyzed as source material, then consolidated by ownership and dependency rather than copied wholesale.
+
+- [`docs/source-ingestion.md`](docs/source-ingestion.md) — source-by-source ingestion and consolidation matrix
 - [`docs/skill-map.md`](docs/skill-map.md) — complete capability map
 - [`docs/module-map.md`](docs/module-map.md) — nine-source ownership model
 - [`docs/source-map.md`](docs/source-map.md) — what belongs where
 - [`docs/cross-cutting-gaps.md`](docs/cross-cutting-gaps.md) — missing cross-layer knowledge
+- [`docs/integration-status.md`](docs/integration-status.md) — integration status and quality bar
+- [`docs/interview-map.md`](docs/interview-map.md) — interview and system-design verification
 - [`technologies/README.md`](technologies/README.md) — canonical technology notes
 - [`technologies/registry.md`](technologies/registry.md) — technology inventory
 - [`projects/README.md`](projects/README.md) — production project portfolio
+- [`projects/project-specs.md`](projects/project-specs.md) — detailed project acceptance criteria
 
 ## Status
 
-The repository architecture and integration model are established. Content is now being expanded systematically across the eight remaining source domains while cross-cutting material is consolidated here. `learn-dsa` remains complete.
+The integration architecture is established and the first cross-cutting gaps are implemented. The current pass is deep ingestion of the eight non-DSA source repositories, followed by strengthening canonical technology notes, wiring source references into the skill graph, and building the project/interview/production verification layer.
+
+The rule remains: specialized repositories own depth; `learn-fullstack` owns synthesis, cross-layer behavior and production judgment. `learn-dsa` remains complete.
