@@ -18,78 +18,38 @@ Build one coherent Senior/Staff Fullstack + AI engineering knowledge system from
 | `learn-dsa` | algorithms/data structures/interview solving | complete; use for complexity and interview verification |
 | `learn-fullstack` | synthesis | own cross-layer concepts, architecture, production and projects |
 
-## What has been integrated
+## Integrated foundation
 
-### Foundations
+The fullstack repository now owns the cross-layer concepts that otherwise get fragmented across the specialized repositories: regex/text processing, encoding and serialization, cryptography, time/randomness, HTTP, DNS/TLS/networking, browser trust boundaries, concurrency/backpressure, frontend/backend contracts, data consistency/messaging, AI application architecture, and production reliability.
 
-- programming/runtime mental models
-- regex
-- encoding, Unicode, bytes and serialization
-- cryptography
-- time, clocks and secure randomness
-- HTTP and web protocol semantics
-- DNS, TCP/UDP/QUIC and TLS mental model
-- browser trust boundaries
-- concurrency, cancellation and backpressure
+## Integrated patterns
 
-### Application architecture
+The cross-layer pattern layer is built out for request lifecycle/error propagation, authentication/authorization, caching/invalidation, idempotent commands, transaction/outbox, background jobs, pagination, file uploads, rate limiting, retries/timeouts/circuit breakers, observability propagation, and AI/RAG request pipelines.
 
-- frontend/backend contracts
-- API evolution and error semantics
-- data consistency
-- queues and delivery semantics
-- outbox pattern
-- synchronous vs asynchronous workflows
-- realtime and streaming
-- AI application architecture
-
-### Production
-
-- reliability patterns
-- observability
-- security boundaries
-- performance/capacity thinking
-- testing against real dependencies
-- deployment and operational concerns
+These patterns deliberately describe invariants and failure modes rather than duplicating Fastify, FastAPI, PostgreSQL, Redis, Kafka, AWS, or AI SDK tutorials.
 
 ## Technology strategy
 
 Technology-specific notes remain under `technologies/` with one canonical note per technology. Deep language/framework study remains in the specialized repositories. Fullstack notes explain how technologies interact and where trade-offs appear.
 
-Examples already established:
+The Python backend layer has now been strengthened for FastAPI, Pydantic, and SQLAlchemy, including lifecycle, validation, async behavior, transaction boundaries, pooling, migrations, testing, security, and failure modes.
 
-```text
-TypeScript → React/Next.js → Zod → API contract → Fastify
-                                     ↓
-                             PostgreSQL / Redis
-                                     ↓
-                              queue / worker
-                                     ↓
-                           AI / search / tools
-                                     ↓
-                       OpenTelemetry / security
-                                     ↓
-                            Docker / AWS / K8s
-```
+## Source ingestion
 
-## Integration quality bar
+Each specialized repository now has an integration boundary document where the source curriculum hands off to `learn-fullstack`. The source-ingestion map defines the four required layers for future audits: fundamentals, mechanisms, production concerns, and cross-layer integration points.
 
-A topic is not considered integrated merely because its name appears in a roadmap. The integrated material should let the learner:
+`learn-fullstack` should continue to absorb missing *concepts and connections*, not duplicate specialized material. When a specialized source is weak or incomplete, improve that source repository directly rather than hiding the gap inside the synthesis repository.
 
-1. explain the mental model,
-2. implement the mechanism,
-3. debug failures,
-4. measure behavior,
-5. secure the boundary,
-6. reason about scale and cost,
-7. defend the design trade-off.
+## Verification layer
+
+The repository now contains an interview map and ten production project specifications. These are the verification mechanism: a topic is valuable only when it can be explained, implemented, debugged, measured, secured, scaled, and defended in a realistic system.
 
 ## Remaining work
 
-1. Continue deep source ingestion from the eight non-DSA repositories.
-2. Expand weak technology notes only where they are part of the canonical stack.
-3. Add explicit source links from integrated concepts to specialized repositories.
-4. Build production-grade projects that exercise multiple layers together.
-5. Add interview/system-design verification against the integrated skill graph.
+1. Continue source-by-source content audits, starting with the weakest specialized material rather than blindly expanding every repository.
+2. Strengthen remaining canonical technology notes where they are still too shallow for production use.
+3. Add source links where a cross-layer concept should hand the learner back to a specialized repository for implementation depth.
+4. Turn the ten project specifications into actual repositories/artifacts with tests, observability, security, deployment, failure injection, and runbooks.
+5. Run final consistency audits: duplicate concepts, broken links, missing registry entries, roadmap-to-content coverage, and interview/project coverage.
 
-Do not copy whole source repositories into `learn-fullstack`. The output should be a connected skill system, not nine courses pasted together.
+Do not copy whole source repositories into `learn-fullstack`. The target is a connected skill system, not nine courses pasted together.
