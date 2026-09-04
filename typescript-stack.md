@@ -1,25 +1,23 @@
 # TypeScript Stack in Fullstack Engineering
 
-This repo treats `learn-js-ts` as the language-depth source of truth. This file explains the TypeScript stack used for production browser and server work.
+This repo treats `learn-js-ts` as the language-depth source of truth. This file describes the TypeScript stack used for production browser and server work.
+
+Technology-specific notes live under `technologies/`, with one canonical file per technology.
 
 ## Canonical application path
 
 ```text
 TypeScript
   ↓
-strict types / modules / async
-  ↓
 React + Next.js
   ↓
 TanStack Query / Zustand / React Hook Form
   ↓
-Zod runtime validation
+Zod (shared runtime schema)
   ↓
 API contract
   ↓
 Node.js + Fastify
-  ↓
-Zod runtime validation
   ↓
 PostgreSQL + Redis
   ↓
@@ -29,6 +27,8 @@ pnpm
   ↓
 Docker + observability
 ```
+
+Zod appears in both frontend and TypeScript backend systems because it serves the same cross-layer role: runtime schemas at trust boundaries. The repository maintains a single Zod note at `technologies/shared/zod.md`.
 
 ## Default choices
 
@@ -43,7 +43,7 @@ Docker + observability
 | Client state | Zustand; Redux Toolkit when justified |
 | Server state | TanStack Query |
 | Forms | React Hook Form |
-| Runtime validation | **Zod** |
+| Runtime schemas | Zod |
 | HTTP service | Fastify |
 | Outbound HTTP | native `fetch` |
 | API contract | OpenAPI for REST |
@@ -54,36 +54,9 @@ Docker + observability
 | Testing | Vitest |
 | E2E | Playwright |
 | Logging | Pino |
-| Async runtime | Node.js event loop |
-
-## Zod's role
-
-TypeScript gives compile-time guarantees. Zod validates actual runtime data.
-
-```text
-unknown data
-    ↓
-Zod schema
-    ↓
-validated value
-    ↓
-typed application logic
-```
-
-Use it at trust boundaries such as:
-
-- form submissions
-- API request bodies
-- query/path parameters
-- environment configuration
-- third-party API responses
-- webhook payloads
-- persisted data that may have changed shape
-
-Do not use Zod as a replacement for authorization or domain rules.
 
 ## Engineering focus
 
-Focus on runtime behavior, the event loop, promises, streams, type boundaries, runtime validation, API contracts, error handling, module architecture, dependency ownership, testing, performance, security, and operational behavior.
+Focus on runtime behavior, the event loop, promises, streams, type boundaries, runtime schemas, API contracts, error handling, module architecture, dependency ownership, testing, performance, security, and operational behavior.
 
 Deep JavaScript and TypeScript language coverage remains in `learn-js-ts`.
