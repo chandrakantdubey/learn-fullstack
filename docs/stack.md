@@ -10,32 +10,81 @@ The stack is intentionally opinionated. Alternatives are introduced only when th
 | Backend + AI | Python | Excellent ecosystem for APIs, data, ML, and AI |
 | Systems exposure | C/C++ concepts | Understand memory, compilation, and low-level behavior without making it a primary application language |
 
-## Web
+## Web / Frontend
 
 | Layer | Default |
 | --- | --- |
 | HTML | HTML5 |
-| CSS | CSS + Tailwind where appropriate |
+| CSS | CSS + Tailwind CSS where appropriate |
 | UI | React |
 | Fullstack React framework | Next.js |
+| Component primitives | Radix UI + shadcn/ui |
+| Client state | Zustand; Redux Toolkit when complexity justifies it |
+| Server state | TanStack Query |
+| Forms | React Hook Form |
+| Runtime validation | **Zod** |
 | Browser testing | Playwright |
+| Unit/component testing | Vitest + Testing Library |
+| Build tooling | Vite where a standalone frontend is appropriate; Next.js tooling otherwise |
+| Package manager | pnpm |
 
-## Backend
+## TypeScript Backend
 
 | Layer | Default |
 | --- | --- |
-| Python API | FastAPI |
-| TypeScript API | Node.js + Fastify |
-| Validation | Pydantic / Zod |
-| HTTP client | httpx / fetch |
-| Background work | Celery or a focused queue worker |
+| Runtime | Node.js |
+| HTTP service | Fastify |
+| Runtime validation | **Zod** |
+| API contract | OpenAPI where REST is used |
+| HTTP client | native `fetch` |
+| PostgreSQL | `pg` |
+| SQL / ORM | Drizzle or Prisma when ORM features are justified |
+| Cache | Redis |
+| Background jobs | BullMQ or a focused worker |
+| Logging | Pino |
+
+## Python Backend / AI
+
+| Layer | Default |
+| --- | --- |
+| API | FastAPI |
+| Validation | Pydantic |
+| HTTP client | httpx |
+| Database | SQLAlchemy + psycopg |
+| Migrations | Alembic |
+| Background work | Celery or a focused worker |
+| Testing | pytest |
+| AI / ML | PyTorch + scikit-learn |
+
+## Validation rule
+
+Zod and Pydantic are runtime boundary tools, not substitutes for domain modeling.
+
+```text
+untrusted input
+      ↓
+Zod / Pydantic
+      ↓
+validated command
+      ↓
+authentication / authorization
+      ↓
+domain/application logic
+      ↓
+data / external systems
+```
+
+See:
+
+- `frontend/concepts/runtime-validation.md`
+- `backend/concepts/api-contracts-and-validation.md`
 
 ## Data
 
 | Purpose | Default |
 | --- | --- |
 | Relational DB | PostgreSQL |
-| SQL access | SQLAlchemy / psycopg; Prisma/Drizzle where appropriate in TypeScript |
+| SQL access | SQLAlchemy/psycopg in Python; pg + Drizzle/Prisma in TypeScript |
 | Cache | Redis |
 | Search | OpenSearch/Elasticsearch concepts |
 | Vector search | pgvector first; dedicated vector DB when justified |
@@ -47,6 +96,7 @@ The stack is intentionally opinionated. Alternatives are introduced only when th
 | Cloud queue | SQS |
 | Event streaming | Kafka |
 | Event-driven AWS integration | EventBridge |
+| Reliability patterns | Idempotency, outbox, bounded retries, circuit breakers, backpressure |
 
 ## Infrastructure
 
