@@ -6,7 +6,7 @@ Build one coherent Senior/Staff Fullstack + AI engineering knowledge system from
 
 ## Canonical master list
 
-`docs/master-skill-universe.md` is now the authoritative 20-section checklist. It is the source of truth for placement, ownership and coverage.
+`docs/master-skill-universe.md` is the authoritative 20-section checklist. It is the source of truth for placement, ownership and coverage.
 
 Each repository also contains `MASTER-COVERAGE.md`, so ownership is visible from both the integration layer and the source repository.
 
@@ -26,9 +26,9 @@ Each repository also contains `MASTER-COVERAGE.md`, so ownership is visible from
 
 ## Integrated cross-cutting foundations
 
-Fullstack owns the concepts that span multiple source repositories: regex/text processing, encoding/serialization, time/randomness, cryptography, HTTP semantics, DNS/TLS/networking, browser trust boundaries, concurrency/backpressure, frontend/backend contracts, data consistency/messaging, AI application architecture, reliability, observability, SLOs, capacity and system design.
+Fullstack owns the concepts that span multiple source repositories: regex/text processing, parsing vs validation, Unicode/encoding/bytes, serialization/schema evolution, numeric precision and money, time/randomness, cryptography, HTTP semantics, DNS/TLS/networking, browser trust boundaries, concurrency/cancellation, resource lifecycle, frontend/backend contracts, BFF/gateway boundaries, data consistency/messaging, reliability/recovery, observability/SLOs/capacity and AI application architecture.
 
-Systems and infrastructure foundations have also been expanded so Linux/networking, cloud, Kubernetes, Terraform, CI/CD and operational troubleshooting have explicit homes in the integrated structure.
+Systems and infrastructure foundations have explicit homes for Linux/networking, cloud, Kubernetes, Terraform, CI/CD and operational troubleshooting.
 
 ## Integration rules
 
@@ -39,12 +39,24 @@ Systems and infrastructure foundations have also been expanded so Linux/networki
 5. Alternatives are awareness unless a project requires them.
 6. Projects and interview defense are the final verification layer.
 
+## Gap closure completed
+
+The structural audit exposed several cross-cutting items that had been listed but were not represented by canonical documents. These are now closed with:
+
+- `foundations/programming/money-and-numeric-precision.md`
+- `foundations/programming/parsing-vs-validation.md`
+- `systems/resource-lifecycle-and-graceful-shutdown.md`
+- `architecture/bff-and-gateway-patterns.md`
+- `production/disaster-recovery.md`
+
+The coverage matrix, cross-cutting gap index and final skill graph now point to the actual canonical paths and no longer depend on deleted/stale validation paths.
+
 ## Completion gate
 
-A master-list item is considered structurally covered when it has a primary owner and a defined handoff. It is mastery-complete only after the learner can:
+A master-list item is considered structurally covered when it has a primary owner, canonical location and defined handoff. It is mastery-complete only after the learner can:
 
-**Understand → Implement → Debug → Measure → Secure → Test → Scale → Operate → Defend trade-offs.**
+**Understand → Implement → Debug → Measure → Secure → Test → Scale → Operate → Recover → Defend trade-offs.**
 
 ## Current state
 
-The master ownership/placement pass is complete across all nine repositories. The next work is execution: building the production projects, running interview/system-design verification, and fixing only gaps exposed by that verification rather than reopening repository ownership decisions.
+The repository integration, master placement and identified cross-cutting gap-closure pass are complete across all nine repositories. The remaining work is evidence generation: build the production projects, run interview/system-design verification, and fix only genuine weaknesses exposed by implementation.
