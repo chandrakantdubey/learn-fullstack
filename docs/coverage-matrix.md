@@ -1,23 +1,26 @@
 # Fullstack Competency Coverage
 
-This matrix tracks the original Fullstack Engineering model against the repository.
+This matrix tracks the Fullstack Engineering model against the repository and points each capability at one canonical location.
 
 | Domain | Status | Canonical location |
 | --- | --- | --- |
 | Programming fundamentals | Covered | `foundations/` |
-| Web / Internet | Covered | `web/`, `systems/networking.md` |
+| Web / Internet | Covered | `web/`, `systems/networking/` |
 | Frontend engineering | Covered | `frontend/` |
+| TypeScript application engineering | Covered | `typescript/`, `typescript-stack.md` |
+| Runtime validation / Zod | Covered | `frontend/concepts/runtime-validation.md`, `backend/concepts/api-contracts-and-validation.md` |
 | Backend engineering | Covered | `backend/` |
-| Relational data | Covered | `data/data-modeling.md`, `data/postgresql.md` |
-| Redis / caching | Covered | `data/redis.md` |
+| Python engineering | Integration track | `python/`; full depth in `learn-python` |
+| Relational data | Covered | `data/concepts/`, `data/postgresql.md` |
+| Redis / caching | Covered | `data/concepts/redis.md` |
 | NoSQL | Covered | `data/nosql-search-vectors.md` |
 | Search | Covered | `data/nosql-search-vectors.md` |
 | Vector databases | Covered | `data/nosql-search-vectors.md` |
-| Linux | Covered | `systems/linux.md` |
-| Networking | Covered | `systems/networking.md` |
+| Linux | Covered | `systems/linux/` |
+| Networking | Covered | `systems/networking/` |
 | Distributed systems | Covered | `systems/distributed-systems.md` |
-| Messaging / events | Covered | `backend/messaging-and-events.md` |
-| Security | Covered | `production/security.md` |
+| Messaging / events | Covered | `backend/concepts/messaging-and-events.md` |
+| Security | Covered | `production/security.md`, `backend/concepts/authentication-and-security.md` |
 | Testing | Covered | `production/`, frontend testing notes |
 | Observability | Covered | `production/observability.md` |
 | Reliability | Covered | `production/reliability.md` |
@@ -29,16 +32,18 @@ This matrix tracks the original Fullstack Engineering model against the reposito
 | Terraform / IaC | Covered | `infrastructure/terraform.md` |
 | CI/CD | Covered | `infrastructure/ci-cd.md` |
 | System design | Covered | `architecture/` |
-| Python engineering | Integration track | `python/`; full depth in `learn-python` |
-| TypeScript engineering | Integration track | `typescript/`; full depth in `learn-js-ts` |
+| AI engineering bridge | Integration track | `docs/skill-map.md`, `docs/stack.md`; `learn-ai` remains the deep-dive source |
 | DSA / CS | Integration track | `learn-dsa` remains the deep-dive source |
-| AI engineering bridge | Integration track | `docs/stack.md`, `learn-ai` remains the deep-dive source |
 
 ## Meaning of status
 
 **Covered** means the integrated Fullstack repository contains a first-class explanation of the capability and its production implications.
 
 **Integration track** means this repository defines how the capability fits Fullstack Engineering while the specialized repository remains the deeper source of truth.
+
+## Curation rule
+
+The repository should have a small canonical stack. Large technology inventories are reference material, not a list of things to learn simultaneously. New tools should be added to the appropriate capability first and only then included in inventories when they have a clear role.
 
 ## Original model preserved
 
