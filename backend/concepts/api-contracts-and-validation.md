@@ -9,7 +9,7 @@ HTTP request
     ↓
 transport parsing
     ↓
-validation
+runtime schema validation
     ↓
 authentication / authorization
     ↓
@@ -22,61 +22,46 @@ repository / external service
 
 Validation belongs near the boundary. Domain invariants still belong in domain/application logic.
 
-## TypeScript
+## Runtime validation
 
-Use **Zod** for runtime validation in TypeScript services.
-
-```ts
-import { z } from "zod";
-
-const CreateUser = z.object({
-  email: z.string().email(),
-  name: z.string().min(1).max(100),
-});
-
-type CreateUser = z.infer<typeof CreateUser>;
-
-const input = CreateUser.parse(request.body);
-```
-
-The important distinction is:
-
-```text
-TypeScript type
-  = compile-time contract
-
-Zod schema
-  = runtime contract
-```
-
-## Python
-
-Use **Pydantic** for the equivalent boundary validation in FastAPI/Python services.
+The concrete validation technology depends on the implementation language:
 
 ```text
 TypeScript service → Zod
 Python service     → Pydantic
 ```
 
-Both should produce the same conceptual API contract even when the implementation language differs.
+The repository keeps the detailed technology notes in one canonical location rather than duplicating them across frontend/backend concept files.
+
+See `technologies/shared/zod.md` for Zod and the Python technology notes for Pydantic.
+
+## Compile-time vs runtime
+
+```text
+TypeScript type
+  = compile-time contract
+
+Runtime schema
+  = executable boundary check
+```
+
+Generated TypeScript types do not validate network data at runtime.
 
 ## OpenAPI
 
 For REST APIs, the externally visible contract should be representable through OpenAPI.
 
 ```text
-Schema
-  ↓
-validation
-  ↓
-request / response contract
-  ↓
-OpenAPI documentation
-  ↓
+schema / contract
+      ↓
+request + response definitions
+      ↓
+OpenAPI
+      ↓
 client integration
 ```
 
-Do not assume generated types remove the need for runtime validation. Generated TypeScript types are still compile-time artifacts.
+OpenAPI describes the external HTTP contract; runtime validation enforces data at execution time.
 
 ## Request validation
 
@@ -99,9 +84,9 @@ Response validation is especially useful when consuming third-party services, pr
 ```text
 external response
       ↓
-validation
+runtime validation / normalization
       ↓
-normalized internal model
+internal model
       ↓
 domain logic
 ```
@@ -162,9 +147,9 @@ Prefer additive changes. When breaking changes are unavoidable, version the cont
 - Test invalid inputs as aggressively as happy paths.
 - Keep Python and TypeScript services aligned on the same business contract.
 
-## Connects to
+## Related
 
+- `technologies/shared/zod.md`
 - `backend/concepts/service-architecture.md`
 - `backend/concepts/authentication-and-security.md`
-- `frontend/concepts/runtime-validation.md`
 - `docs/stack.md`
