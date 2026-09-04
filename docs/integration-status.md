@@ -4,6 +4,12 @@
 
 Build one coherent Senior/Staff Fullstack + AI engineering knowledge system from the nine repositories without turning `learn-fullstack` into a duplicate copy of the other eight.
 
+## Canonical master list
+
+`docs/master-skill-universe.md` is now the authoritative 20-section checklist. It is the source of truth for placement, ownership and coverage.
+
+Each repository also contains `MASTER-COVERAGE.md`, so ownership is visible from both the integration layer and the source repository.
+
 ## Source ownership
 
 | Repository | Primary ownership | Integration rule |
@@ -13,58 +19,32 @@ Build one coherent Senior/Staff Fullstack + AI engineering knowledge system from
 | `learn-backend` | APIs, services, backend/distributed systems | backend depth stays there; service-to-data and end-to-end architecture are synthesized |
 | `learn-python` | Python language/runtime/ecosystem | Python depth stays there; service/AI integration is synthesized |
 | `learn-sql` | SQL/PostgreSQL | database depth stays there; application consistency is synthesized |
-| `learn-docker` | Docker/container operations | container mechanics stays there; deployment architecture is synthesized |
+| `learn-docker` | Docker/container/Kubernetes operations | container/orchestration mechanics stays there; deployment architecture is synthesized |
 | `learn-ai` | ML, deep learning, LLMs, RAG, agents, inference | AI depth stays there; product/system boundaries are synthesized |
 | `learn-dsa` | algorithms/data structures/interview solving | complete; used for complexity and interview verification |
 | `learn-fullstack` | synthesis | owns cross-layer concepts, architecture, production and projects |
 
-## Integrated foundation
+## Integrated cross-cutting foundations
 
-The fullstack repository owns the cross-layer concepts that otherwise fragment across specialized sources: regex/text processing, encoding/serialization, cryptography, time/randomness, HTTP, DNS/TLS/networking, browser trust boundaries, concurrency/backpressure, frontend/backend contracts, data consistency/messaging, AI application architecture and production reliability.
+Fullstack owns the concepts that span multiple source repositories: regex/text processing, encoding/serialization, time/randomness, cryptography, HTTP semantics, DNS/TLS/networking, browser trust boundaries, concurrency/backpressure, frontend/backend contracts, data consistency/messaging, AI application architecture, reliability, observability, SLOs, capacity and system design.
 
-## Integrated patterns
+Systems and infrastructure foundations have also been expanded so Linux/networking, cloud, Kubernetes, Terraform, CI/CD and operational troubleshooting have explicit homes in the integrated structure.
 
-The cross-layer pattern layer covers request lifecycle/error propagation, authentication/authorization, caching/invalidation, idempotent commands, transaction/outbox, background jobs, pagination, file uploads, rate limiting, retries/timeouts/circuit breakers, observability propagation and AI/RAG request pipelines.
+## Integration rules
 
-These describe invariants and failure modes rather than duplicating technology tutorials.
+1. Specialized repository = deep implementation knowledge.
+2. Fullstack = cross-layer connections, invariants, architecture and production judgment.
+3. One concept = one canonical explanation.
+4. One technology = one canonical technology note.
+5. Alternatives are awareness unless a project requires them.
+6. Projects and interview defense are the final verification layer.
 
-## Source integration complete
+## Completion gate
 
-All eight non-DSA specialized sources now have explicit ownership/handoff documentation, and the integration layer has a final skill graph plus coverage audit.
+A master-list item is considered structurally covered when it has a primary owner and a defined handoff. It is mastery-complete only after the learner can:
 
-The AI source has been finalized around the progression from AI/ML foundations through Transformers, LLMs, RAG, fine-tuning, agents, evaluation, inference, serving and production AI. The existing AI material already provides substantial depth; the integration work makes its boundaries explicit rather than copying it into `learn-fullstack`.
+**Understand → Implement → Debug → Measure → Secure → Test → Scale → Operate → Defend trade-offs.**
 
-## Final architecture
+## Current state
 
-```text
-specialized depth
-      ↓
-concept + mechanism understanding
-      ↓
-fullstack cross-layer synthesis
-      ↓
-production patterns
-      ↓
-end-to-end projects
-      ↓
-interview/system-design defense
-```
-
-See:
-
-- `docs/final-skill-graph.md`
-- `docs/coverage-audit.md`
-- `docs/source-ingestion.md`
-- `docs/interview-map.md`
-- `projects/project-specs.md`
-
-## Remaining work
-
-The repository integration phase is complete. Remaining work is execution:
-
-1. build the production project portfolio
-2. execute the interview/system-design verification loop
-3. audit links and technology versions periodically
-4. deepen source material only when project/interview practice exposes a genuine gap
-
-Do not copy whole source repositories into `learn-fullstack`. The target is one connected skill system, not nine courses pasted together.
+The master ownership/placement pass is complete across all nine repositories. The next work is execution: building the production projects, running interview/system-design verification, and fixing only gaps exposed by that verification rather than reopening repository ownership decisions.
