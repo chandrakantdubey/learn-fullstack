@@ -9,11 +9,11 @@ This is the backlog for knowledge that should exist in the integrated Fullstack 
 - Bytes, encodings and base64
 - Serialization/deserialization and schema evolution
 - Floating-point behavior, precision and money representation
-- dates, time zones, clocks and monotonic time
-- randomness and secure randomness
-- hashing, checksums and content addressing
-- parsing vs validation
-- resource ownership and cleanup
+- Dates, time zones, clocks and monotonic time
+- Randomness and secure randomness
+- Hashing, checksums and content addressing
+- Parsing vs validation
+- Resource ownership and cleanup
 
 ## Web and networking
 
@@ -114,6 +114,24 @@ The AI repository owns AI depth. `learn-fullstack` additionally owns:
 - model observability and product metrics
 - fallback/provider routing
 - AI-specific latency and capacity planning
+
+## Implemented integrated concepts
+
+The first cross-layer foundation set now includes:
+
+- `foundations/programming/regex.md`
+- `foundations/programming/encoding-and-serialization.md`
+- `foundations/programming/time-and-randomness.md`
+- `foundations/security/cryptography.md`
+- `systems/concurrency.md`
+- `web/http.md`
+- `web/dns-tls-networking.md`
+- `web/browser-trust-boundaries.md`
+- `web/realtime-and-streaming.md`
+- `architecture/frontend-backend-contracts.md`
+- `architecture/data-consistency-and-messaging.md`
+- `architecture/ai-application-architecture.md`
+- `production/reliability.md`
 
 ## Rule
 
