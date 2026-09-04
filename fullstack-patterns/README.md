@@ -2,11 +2,10 @@
 
 Cross-layer patterns that connect frontend, backend, data, infrastructure, and production concerns.
 
-These are not framework tutorials. Each pattern explains a system boundary and the trade-offs behind it.
+These are not technology tutorials. Each pattern explains a system boundary and the trade-offs behind it.
 
 ## Patterns
 
-- [Runtime validation and API contracts](validation-and-api-contracts.md)
 - Request lifecycle and error propagation
 - Authentication and authorization boundaries
 - Client/server state separation
@@ -23,6 +22,16 @@ These are not framework tutorials. Each pattern explains a system boundary and t
 - Async event-driven workflows
 - AI/RAG request pipelines
 
+## Technology ownership
+
+Technology-specific knowledge belongs under `technologies/`.
+
+For example, Zod has one canonical technology note at:
+
+`technologies/shared/zod.md`
+
+Patterns may reference technologies, but they should not duplicate their technology-specific notes.
+
 ## Pattern template
 
 ```text
@@ -32,7 +41,7 @@ Boundary
   ↓
 Invariant
   ↓
-Implementation
+Implementation choices
   ↓
 Failure modes
   ↓
