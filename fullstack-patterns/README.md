@@ -2,7 +2,7 @@
 
 Cross-layer patterns that connect frontend, backend, data, infrastructure, and production concerns.
 
-These are not technology tutorials. Each pattern explains a system boundary and the trade-offs behind it.
+These are not technology tutorials. Each pattern explains a system boundary, the invariant it protects, and the trade-offs behind it.
 
 ## Patterns
 
@@ -22,16 +22,6 @@ These are not technology tutorials. Each pattern explains a system boundary and 
 - Async event-driven workflows
 - AI/RAG request pipelines
 
-## Technology ownership
-
-Technology-specific knowledge belongs under `technologies/`.
-
-For example, Zod has one canonical technology note at:
-
-`technologies/shared/zod.md`
-
-Patterns may reference technologies, but they should not duplicate their technology-specific notes.
-
 ## Pattern template
 
 ```text
@@ -41,13 +31,27 @@ Boundary
   ↓
 Invariant
   ↓
+Contract
+  ↓
 Implementation choices
   ↓
 Failure modes
   ↓
 Security
   ↓
-Performance
+Performance / scale
   ↓
 Operational signals
 ```
+
+## Technology ownership
+
+Technology-specific knowledge belongs under `technologies/`. Patterns may reference technologies, but they should not duplicate technology-specific notes.
+
+## Verification
+
+A pattern is not considered understood because its diagram is familiar. Prove it through the relevant project and the final verification loop:
+
+**Understand → Implement → Debug → Measure → Secure → Test → Scale → Operate → Recover → Defend trade-offs.**
+
+See [`../docs/production-verification.md`](../docs/production-verification.md).
