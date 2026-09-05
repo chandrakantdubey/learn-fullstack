@@ -1,10 +1,10 @@
 # Senior/Staff Fullstack + AI Engineering Preparation Plan
 
-This plan is the planning layer for `learn-fullstack`. It is derived from the existing **Plan Fullstack AI Preparation** discussion and the nine specialized learning repositories.
+This is the planning layer for the nine-repository system. It is derived from the existing **Plan Fullstack AI Preparation** discussion and the nine specialized learning repositories.
 
 ## Target
 
-Become capable of interviewing and operating as a Senior/Staff-level Fullstack + AI Engineer who can design, build, debug and scale production systems across:
+Become capable of operating and interviewing as a Senior/Staff Fullstack + AI Engineer who can design, build, debug and scale production systems across:
 
 ```text
 Web Platform
@@ -26,7 +26,7 @@ Observability / Security / Testing
 ML / LLMs / RAG / Agents / MCP / Inference
 ```
 
-The goal is not framework memorization. The goal is a connected engineering mental model.
+The goal is a connected engineering mental model, not framework memorization.
 
 ## Daily operating model
 
@@ -41,223 +41,147 @@ The work should alternate between understanding and implementation rather than s
 
 ## 12-week structure
 
-### Weeks 1–4 — Foundations and deep learning
+### Weeks 1–4 — Foundations
 
-Rebuild the mental model across the stack.
+Rebuild the mental model across the stack:
 
-**Primary areas**
-- JavaScript and TypeScript runtime/language fundamentals
-- Python fundamentals and production Python
+- JavaScript/TypeScript and Python runtime fundamentals
 - browser and web platform
-- React and Next.js architecture
+- React/Next.js architecture
 - HTTP/API design
 - backend service architecture
-- SQL/PostgreSQL
-- Redis and caching
-- Docker/Linux/networking fundamentals
+- SQL/PostgreSQL and Redis
+- Linux/networking/container fundamentals
 - AI/ML foundations
-- tokens, embeddings, attention, transformers and language models
+- tokens, embeddings, attention, Transformers and language models
 
-**Expected outcome:** explain how a request moves through a modern application and how the same system changes when AI is introduced.
+Expected outcome: explain a request from browser through runtime, service and data layers and explain where AI changes the architecture.
 
-### Weeks 5–8 — Production projects
+### Weeks 5–8 — Production systems
 
-Build integrated applications rather than isolated technology demos.
+Build integrated applications, not isolated demos.
 
 Every serious project should exercise multiple boundaries:
 
 ```text
-UI → API → validation → auth → database → cache → async work → AI → telemetry
+UI → API → validation → auth → database → cache → async work → AI/search → telemetry
 ```
 
 Focus on:
+
 - API contracts
 - authentication/authorization
 - transactions and consistency
-- caching and invalidation
-- queues and idempotency
-- background workers
-- RAG ingestion/retrieval/generation
-- tool calling and agent workflows
+- caching/invalidation
+- queues/idempotency
+- workers and graceful shutdown
+- RAG and retrieval authorization
+- tools and bounded agent workflows
 - evaluation
 - observability
 - security
 - deployment
-- failure handling
+- failure injection
 
-The ten AI projects already present in `learn-ai` become candidates for the AI-heavy project track; they should be strengthened with fullstack concerns rather than copied wholesale.
+Use [`docs/production-verification.md`](production-verification.md) as the acceptance standard.
 
-### Weeks 9–12 — Interview, system design and project defense
+### Weeks 9–12 — Verification and defense
 
-Shift from learning new material to proving mastery.
+Stop adding breadth unless implementation exposes a real gap.
 
-**System design**
-- requirements and constraints
-- capacity estimation
-- API/data contracts
-- storage choices
-- caching
-- async/event-driven design
-- consistency
-- partitioning/sharding
-- reliability and failure domains
-- observability
-- security
-- cost
-- multi-region trade-offs
-- AI-specific latency, token, retrieval and inference constraints
+Focus on:
 
-**Interview engineering**
-- DSA daily
-- JavaScript/TypeScript internals
-- Python internals
-- React/Next.js architecture
-- backend/API design
-- PostgreSQL internals
-- distributed systems
-- cloud/container fundamentals
-- AI/LLM engineering
+- DSA and coding
+- debugging drills
+- system design
+- project defense
+- architecture trade-offs
+- incident/recovery drills
+- security scenarios
+- load/capacity analysis
+- AI evaluation and model/provider trade-offs
 
-**Project defense**
-For every major project, be able to explain:
-1. requirements
-2. architecture
-3. data model
-4. API contracts
-5. scaling assumptions
-6. failure modes
-7. security model
-8. observability
-9. cost model
-10. alternatives and rejected designs
-11. production incidents you would expect
-12. how you would evolve the system
+## Project strategy
 
-## Repository-to-plan mapping
+There are ten integration projects in `projects/project-specs.md`. Do not build all ten shallowly.
 
-| Preparation area | Source |
-| --- | --- |
+Build enough projects deeply to cover the complete graph:
+
+1. multi-tenant SaaS
+2. realtime collaboration
+3. event-driven order platform
+4. search platform
+5. AI knowledge assistant
+6. agentic operations assistant
+7. background job platform
+8. file/media pipeline
+9. high-throughput URL service
+10. production AI application platform
+
+Every project should leave behind architecture, contracts, tests, telemetry, failure evidence, deployment/recovery procedures and trade-off documentation.
+
+## Repository mapping
+
+| Area | Source |
+|---|---|
 | JS/TS | `learn-js-ts` |
 | Frontend | `learn-frontend` |
 | Backend/distributed | `learn-backend` |
 | Python | `learn-python` |
 | SQL/PostgreSQL | `learn-sql` |
-| Containers | `learn-docker` |
+| Containers/Kubernetes | `learn-docker` |
 | AI/LLM | `learn-ai` |
 | DSA | `learn-dsa` |
-| Integration/project architecture | `learn-fullstack` |
+| Cross-layer synthesis | `learn-fullstack` |
 
-## Learning architecture for this repository
-
-Do not turn the repository into nine copied courses.
-
-Use four layers:
-
-### 1. Concepts
-
-Technology-agnostic mental models:
-
-- HTTP
-- rendering
-- state
-- API contracts
-- authentication
-- transactions
-- caching
-- queues
-- consistency
-- concurrency
-- distributed systems
-- RAG
-- agents
-- evaluation
-
-### 2. Technologies
-
-One canonical note per technology under `technologies/`.
-
-Example:
+## Canonical learning architecture
 
 ```text
-concept: runtime validation
-        ↓
-technology: Zod
-        ↓
-frontend: React Hook Form
-        ↓
-backend: Fastify
-        ↓
-contract: OpenAPI
+Principles
+ ↓
+Mental models
+ ↓
+Mechanisms
+ ↓
+Canonical technologies
+ ↓
+Cross-layer patterns
+ ↓
+Production systems
+ ↓
+Failure/security/scale
+ ↓
+Projects
+ ↓
+Interview defense
 ```
 
-### 3. Patterns
+Use:
 
-Cross-layer engineering patterns:
-
-- repository/service boundaries
-- API versioning
-- idempotency
-- outbox/inbox
-- retries/backoff
-- circuit breaking
-- cache-aside
-- pagination
-- rate limiting
-- background jobs
-- RAG pipelines
-- agent orchestration
-- evaluation loops
-
-### 4. Projects
-
-Projects are the integration tests for the skill map. They should progressively combine more layers and force production decisions.
+- `docs/master-skill-universe.md` for the complete capability universe.
+- `docs/skill-map.md` for capability coverage.
+- `docs/final-skill-graph.md` for dependencies.
+- `docs/source-map.md` for ownership.
+- `docs/architecture-decision-guide.md` for design decisions.
+- `docs/production-verification.md` for implementation evidence.
+- `docs/interview-map.md` for interview/system-design verification.
 
 ## Resource strategy
 
-The preparation plan uses:
+Use specialized repositories as the primary internal knowledge base, official/free resources for implementation details, and one Udemy anchor per major domain where paid material is useful.
 
-- specialized repositories as the primary internal knowledge base
-- official documentation and free practical resources for implementation
-- **one Udemy anchor per major domain** where paid material is useful
-- free vendor/practical platforms alongside it
+Do not create resource lists for their own sake. Every resource should answer a specific learning or implementation need.
 
-Do not create a giant resource list without a reason to use each resource.
+## Completion standard
 
-## Definition of mastery
+A capability is complete only when it passes:
 
-A topic is not complete because a note was read.
+**Understand → Implement → Debug → Measure → Secure → Test → Scale → Operate → Recover → Defend trade-offs.**
 
-A topic is complete when the engineer can:
+Reading creates familiarity. Implementation creates competence. Failure testing creates production judgment. Architecture defense demonstrates senior-level understanding.
 
-```text
-Explain it
-   ↓
-Implement it
-   ↓
-Debug it
-   ↓
-Measure it
-   ↓
-Secure it
-   ↓
-Scale it
-   ↓
-Defend the trade-offs
-```
+## Current phase
 
-## Next repository work
+The repository's knowledge architecture and integration map are complete. The active phase is **evidence generation through projects, failure drills, load tests, recovery exercises and interview defense**.
 
-The next phase is to build the actual integrated skill graph from the nine repositories:
-
-1. inventory source material
-2. identify overlap and contradictions
-3. map each source topic to a canonical concept
-4. map technologies to the single `technologies/` registry
-5. identify missing senior/staff-level topics
-6. define the final learning progression
-7. map projects to capability gaps
-8. add interview/system-design coverage
-9. add practical exercises for every major capability
-10. continuously prune duplicated or low-value material
-
-This is the planning source of truth for the next evolution of `learn-fullstack`.
+Do not expand the curriculum unless an implementation or verification exercise exposes a genuine missing capability.
