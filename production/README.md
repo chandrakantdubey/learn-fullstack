@@ -4,7 +4,6 @@ Production engineering is where correctness becomes operational reliability.
 
 ## Canonical guides
 
-- [`security.md`](security.md) — cross-stack security baseline.
 - [`security-engineering.md`](security-engineering.md) — threat boundaries, identity, secrets and supply chain.
 - [`threat-modeling.md`](threat-modeling.md) — concrete threat-modeling workflow and security verification.
 - [`testing-and-quality.md`](testing-and-quality.md) — unit/integration/contract/E2E, failure, load, security and AI evaluation strategy.
@@ -17,25 +16,7 @@ Production engineering is where correctness becomes operational reliability.
 ## Production loop
 
 ```text
-Build
- ↓
-Test
- ↓
-Secure
- ↓
-Deploy
- ↓
-Observe
- ↓
-Detect
- ↓
-Diagnose
- ↓
-Mitigate
- ↓
-Recover
- ↓
-Improve
+Build → Test → Secure → Deploy → Observe → Detect → Diagnose → Mitigate → Recover → Improve
 ```
 
 ## Required controls
@@ -55,8 +36,8 @@ Improve
 - backup/restore
 - incident response
 
-A feature is not complete when it works locally. It is complete when the team can operate it safely and understand how it behaves under failure, attack, scale and change.
+A feature is not complete when it works locally. It is complete when the team can operate it safely and understand its behavior under failure, attack, scale and change.
 
 ## Final verification
 
-See [`../docs/production-verification.md`](../docs/production-verification.md) for the end-to-end evidence standard.
+Use [`../docs/production-verification.md`](../docs/production-verification.md) as the acceptance contract.
