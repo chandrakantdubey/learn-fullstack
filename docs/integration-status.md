@@ -24,39 +24,74 @@ Each repository also contains `MASTER-COVERAGE.md`, so ownership is visible from
 | `learn-dsa` | algorithms/data structures/interview solving | complete; used for complexity and interview verification |
 | `learn-fullstack` | synthesis | owns cross-layer concepts, architecture, production and projects |
 
-## Integrated cross-cutting foundations
+## Canonical Fullstack layers
 
-Fullstack owns the concepts that span multiple source repositories: regex/text processing, parsing vs validation, Unicode/encoding/bytes, serialization/schema evolution, numeric precision and money, time/randomness, cryptography, HTTP semantics, DNS/TLS/networking, browser trust boundaries, concurrency/cancellation, resource lifecycle, frontend/backend contracts, BFF/gateway boundaries, data consistency/messaging, reliability/recovery, observability/SLOs/capacity and AI application architecture.
+```text
+foundations
+  ↓
+web + systems
+  ↓
+frontend/backend/data integration
+  ↓
+architecture + distributed systems
+  ↓
+infrastructure
+  ↓
+security + testing + observability + reliability
+  ↓
+AI application integration
+  ↓
+projects
+  ↓
+interview/system-design defense
+```
 
-Systems and infrastructure foundations have explicit homes for Linux/networking, cloud, Kubernetes, Terraform, CI/CD and operational troubleshooting.
+## Cross-cutting gap closure
 
-## Integration rules
+The repository now has canonical material for the previously identified cross-layer gaps, including:
 
-1. Specialized repository = deep implementation knowledge.
-2. Fullstack = cross-layer connections, invariants, architecture and production judgment.
-3. One concept = one canonical explanation.
-4. One technology = one canonical technology note.
-5. Alternatives are awareness unless a project requires them.
-6. Projects and interview defense are the final verification layer.
+- regex, parsing, encoding and numeric precision
+- time/randomness and cryptography
+- HTTP, DNS/TLS/networking and browser boundaries
+- concurrency, cancellation and resource lifecycle
+- API contracts and schema evolution
+- BFF/gateway patterns
+- data consistency, messaging and outbox patterns
+- reliability and disaster recovery
+- AI application architecture
+- network debugging
+- architecture decisions
+- testing/quality engineering
+- threat modeling
+- incident response
+- deployment architecture
+- production verification
 
-## Gap closure completed
+## Canonical technology rule
 
-The structural audit exposed several cross-cutting items that had been listed but were not represented by canonical documents. These are now closed with:
+One technology has one canonical technology note. Concept documents explain durable engineering behavior; specialized repositories provide deep implementation detail.
 
-- `foundations/programming/money-and-numeric-precision.md`
-- `foundations/programming/parsing-vs-validation.md`
-- `systems/resource-lifecycle-and-graceful-shutdown.md`
-- `architecture/bff-and-gateway-patterns.md`
-- `production/disaster-recovery.md`
+## Project verification
 
-The coverage matrix, cross-cutting gap index and final skill graph now point to the actual canonical paths and no longer depend on deleted/stale validation paths.
+The ten integration projects are the practical proof layer. The final verification playbook requires vertical slices across:
 
-## Completion gate
+- request lifecycle
+- asynchronous work
+- realtime systems
+- file processing
+- authorization-aware RAG
+- bounded agents
 
-A master-list item is considered structurally covered when it has a primary owner, canonical location and defined handoff. It is mastery-complete only after the learner can:
+Each serious project must cover architecture, contracts, security, testing, observability, failure injection, capacity, cost, deployment and recovery.
+
+## Completion semantics
+
+The **curriculum/knowledge architecture is complete** when the master universe has an owner, canonical path, handoff and verification path for every capability.
+
+**Individual mastery is not claimed until implementation evidence exists.** The required evidence loop is:
 
 **Understand → Implement → Debug → Measure → Secure → Test → Scale → Operate → Recover → Defend trade-offs.**
 
 ## Current state
 
-The repository integration, master placement and identified cross-cutting gap-closure pass are complete across all nine repositories. The remaining work is evidence generation: build the production projects, run interview/system-design verification, and fix only genuine weaknesses exposed by implementation.
+The nine-repository integration, ownership model, canonical skill graph, cross-cutting concepts, production engineering layer, project verification layer and interview defense layer are now established. Future work should be driven by failures found while implementing the projects—not by adding more disconnected roadmap material.
