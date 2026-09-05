@@ -2,13 +2,13 @@
 
 Interview preparation is a verification layer over the skill graph, not a separate course.
 
-## Evaluation loop
+## Universal defense loop
 
 ```text
-Explain → Implement → Debug → Measure → Secure → Scale → Defend
+Understand → Implement → Debug → Measure → Secure → Test → Scale → Operate → Recover → Defend
 ```
 
-A candidate should be able to apply the same loop to a language feature, API, database query, distributed workflow or AI feature.
+A candidate should be able to apply the same loop to a language feature, API, database query, distributed workflow, infrastructure change or AI feature.
 
 ## Foundation questions
 
@@ -22,7 +22,7 @@ A candidate should be able to apply the same loop to a language feature, API, da
 
 ## Web and browser
 
-- Walk a request from URL through DNS, transport, TLS, HTTP, proxy/load balancer and application.
+- Walk a request from URL through DNS, transport, TLS, proxy/load balancer and application.
 - Explain HTTP caching and conditional requests.
 - Explain cookies, sessions, CORS, CSRF, CSP and same-origin boundaries.
 - Choose between HTTP streaming, SSE and WebSockets.
@@ -63,6 +63,7 @@ A candidate should be able to apply the same loop to a language feature, API, da
 - Design a deploy/rollback strategy.
 - Explain readiness versus liveness.
 - Estimate capacity and define useful SLOs.
+- Explain how Terraform state, Kubernetes resources and application releases interact.
 
 ## Security and production
 
@@ -73,10 +74,12 @@ A candidate should be able to apply the same loop to a language feature, API, da
 - Design secrets and key rotation.
 - Explain logs versus metrics versus traces.
 - Walk through an incident from alert to mitigation to postmortem.
+- Explain rollback, recovery, RPO and RTO.
 
 ## AI engineering
 
 - Design an AI feature as a system, not a prompt.
+- Explain tokens, attention, inference, context and decoding at a useful mechanical level.
 - Explain retrieval, chunking, embeddings, ranking and citation provenance.
 - Enforce authorization before retrieval and treat model output as untrusted.
 - Stream model output safely to a browser.
@@ -105,6 +108,7 @@ Each exercise must include requirements, workload, data model, APIs/events, arch
 Do not stop at “this technology is popular.” Defend:
 
 - why this boundary exists;
+- which invariant it protects;
 - why this consistency model is sufficient;
 - why this data store fits the access pattern;
 - why work is synchronous or asynchronous;
@@ -113,4 +117,9 @@ Do not stop at “this technology is popular.” Defend:
 - how operators detect and recover from failure;
 - how security boundaries are enforced;
 - how cost changes with traffic and model usage;
+- what evidence supports the design;
 - what you would replace or simplify at the next scale.
+
+## Interview evidence rule
+
+For project deep dives, answer from the actual implementation. Be able to show the contract, schema, tests, telemetry, failure experiment, deployment path and recovery procedure. If something was not built or measured, say so instead of inventing a result.
