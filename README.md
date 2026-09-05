@@ -30,8 +30,10 @@ Start here:
 4. **[`docs/learning-model.md`](docs/learning-model.md)** — how to study a capability.
 5. **[`docs/architecture-decision-guide.md`](docs/architecture-decision-guide.md)** — how to design and defend systems.
 6. **[`docs/production-verification.md`](docs/production-verification.md)** — how to prove production competence.
-7. **[`docs/interview-map.md`](docs/interview-map.md)** — interview/system-design verification.
-8. **[`projects/project-specs.md`](projects/project-specs.md)** — ten production integration projects.
+7. **[`docs/completion-ledger.md`](docs/completion-ledger.md)** — final coverage and evidence ledger.
+8. **[`docs/interview-map.md`](docs/interview-map.md)** — interview/system-design verification.
+9. **[`projects/project-specs.md`](projects/project-specs.md)** — ten production integration projects.
+10. **[`projects/build-playbook.md`](projects/build-playbook.md)** — executable project strategy and acceptance evidence.
 
 ## Core learning model
 
@@ -170,4 +172,6 @@ The portfolio is not considered complete because the happy path works. The proof
 
 ## Status
 
-The nine-repository integration, ownership model, cross-cutting gap closure, canonical technology model, production verification layer and interview verification layer are established. The remaining “completion” work is execution evidence: building the projects and using the verification playbook to expose any real implementation weaknesses.
+The **knowledge architecture is complete**: the nine-repository ownership model, 20-section skill universe, dependency graph, cross-cutting gap closure, canonical technology model, production layer, project portfolio and interview verification layer are established.
+
+The remaining state is deliberately tracked as **evidence**, not more curriculum. Use `docs/completion-ledger.md` and `projects/build-playbook.md` to turn the knowledge graph into implementation proof. Do not claim mastery until the verification loop has actually been demonstrated.
